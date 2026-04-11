@@ -3,11 +3,10 @@ import { routes } from './routes';
 
 const app = express();
 
+app.set('json spaces', 2);
 app.use(express.json());
 app.use(routes);
 
-const PORT = 3009;
-
-app.listen(PORT, () => {
-  console.log('🚀 API rodando na porta ' + PORT);
+app.listen(3009, () => {
+  console.log('🚀 API rodando na porta 3009');
 });

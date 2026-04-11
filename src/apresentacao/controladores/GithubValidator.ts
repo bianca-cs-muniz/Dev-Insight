@@ -2,11 +2,7 @@ import { z } from 'zod';
 
 export const buscarUsuarioSchema = z.object({
   params: z.object({
-    username: z
-      .string()
-      .min(1, 'username é obrigatório')
-      .max(39, 'username inválido')
-      .regex(/^[a-zA-Z0-9-]+$/, 'username inválido'),
+    username: z.string().min(1, 'username é obrigatório').max(40, 'username inválido').regex(/^[a-zA-Z0-9-]+$/, 'username inválido'),
   }),
 });
 

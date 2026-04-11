@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { ComparacaoController } from '../../presentation/controllers/ComparacaoController';
-import { GithubController } from '../../presentation/controllers/GithubController';
-import { buscarUsuarioSchema, compararUsuariosSchema } from '../../presentation/controllers/GithubValidator';
-import { validate } from '../../presentation/middlewares/validate';
+import { ComparacaoController } from '../../apresentacao/controladores/ComparacaoController';
+import { GithubController } from '../../apresentacao/controladores/GithubController';
+import { buscarUsuarioSchema, compararUsuariosSchema } from '../../apresentacao/controladores/GithubValidator';
+import { validate } from '../../apresentacao/middlewares/Validate';
 
 const routes = Router();
 
