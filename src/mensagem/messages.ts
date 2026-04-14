@@ -5,4 +5,5 @@ export default {
     USUARIO_NAO_ENCONTRADO: 'Usuário não encontrado',
     REPOSITORIOS_NAO_ENCONTRADOS: 'Repositórios não encontrados',
     USUARIO_OBRIGATORIO: 'Usuário obrigatório',
+    TOKEN_ACABOU: 'Token do git acabou, volte amanhã',
 };
