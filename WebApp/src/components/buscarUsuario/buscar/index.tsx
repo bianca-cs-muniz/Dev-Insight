@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Search, ArrowRight } from 'lucide-react'
+import { Search, ArrowRight, Icon, GitCompare } from 'lucide-react'
 import { Tipografias } from '@shared/components/tipografias'
 import { useRouter } from 'next/navigation'
 import { CarregandoProcesso } from '@shared/components/carregandoProcesso/carregandoProcesso'
@@ -74,7 +74,9 @@ export const Buscar = () => {
             </Tipografias.TextoPequeno>
             <ArrowRight className="w-4 h-4" color='white'/>
           </button>
+          
         </div>
+        
       </div>
 
       <div className="flex items-center justify-center gap-2 flex-wrap text-sm">
@@ -92,6 +94,15 @@ export const Buscar = () => {
             <Tipografias.TextoPequeno>{sugestao}</Tipografias.TextoPequeno>
           </button>
         ))}
+      </div>
+      <div className="flex justify-center">
+        <button
+          onClick={() => router.push("/comparar-perfis")}
+          className="flex items-center gap-2 px-4 py-2 text-sm rounded-xl bg-white border border-gray-200 text-gray-600 hover:border-violet-300 hover:text-violet-600 transition dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 w-fit"
+        >
+          <GitCompare className="w-4 h-4" />
+          <Tipografias.TextoPequeno>Comparar dois perfis</Tipografias.TextoPequeno>
+        </button>
       </div>
     </div>
   )
