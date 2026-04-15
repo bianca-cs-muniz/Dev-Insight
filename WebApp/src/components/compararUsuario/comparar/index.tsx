@@ -5,7 +5,7 @@ import { alfa } from '@lib/fonts';
 import { Tipografias } from '@shared/components/tipografias';
 import { AtSign, GitCompare, Shuffle } from 'lucide-react';
 
-export const Comparar = () => {
+export const Comparar = ({ onCompare }: { onCompare: () => void }) => {
   const [dev1, setDev1] = useState('');
   const [dev2, setDev2] = useState('');
 
@@ -86,7 +86,10 @@ export const Comparar = () => {
         </div>
 
         <div className="!mt-9 flex justify-center">
-          <button className="group relative w-full md:w-auto min-w-[340px] cursor-pointer">
+          <button 
+            onClick={onCompare}
+            className="group relative w-full md:w-auto min-w-[340px] cursor-pointer"
+          >
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity" />
             <div className="relative px-8 py-5 bg-gradient-to-r from-purple-600 to-blue-500 rounded-2xl text-white font-bold text-lg shadow-lg active:scale-[0.98] flex items-center justify-center gap-3 group-hover:brightness-90 transition-all">
               <GitCompare size={20}/>
