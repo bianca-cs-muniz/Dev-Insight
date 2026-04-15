@@ -1,7 +1,8 @@
 'use client';
 
-import { Trophy } from 'lucide-react';
+import { Trophy, Crown } from 'lucide-react';
 import { alfa } from '@lib/fonts';
+import { Tipografias } from '@shared/components/tipografias';
 
 interface DevProps {
   nome: string;
@@ -25,109 +26,173 @@ interface ResultadoHeroProps {
 }
 
 export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
-  const score1 = Math.round((dev1.pontuacao.atividade + dev1.pontuacao.popularidade + dev1.pontuacao.qualidade + dev1.pontuacao.consistencia + dev1.pontuacao.stack) / 5);
-  const score2 = Math.round((dev2.pontuacao.atividade + dev2.pontuacao.popularidade + dev2.pontuacao.qualidade + dev2.pontuacao.consistencia + dev2.pontuacao.stack) / 5);
-  
+  const score1 = Math.round(
+    (dev1.pontuacao.atividade +
+      dev1.pontuacao.popularidade +
+      dev1.pontuacao.qualidade +
+      dev1.pontuacao.consistencia +
+      dev1.pontuacao.stack) / 5
+  );
+
+  const score2 = Math.round(
+    (dev2.pontuacao.atividade +
+      dev2.pontuacao.popularidade +
+      dev2.pontuacao.qualidade +
+      dev2.pontuacao.consistencia +
+      dev2.pontuacao.stack) / 5
+  );
+
   const vencedor = score1 > score2 ? dev1 : dev2;
+  const isDev1Winner = vencedor.username === dev1.username;
 
   return (
-    <div className="flex flex-col items-center gap-8 w-full">
-      <div className="flex flex-col items-center text-center gap-2">
-        <div className="bg-yellow-100 p-3 rounded-full text-yellow-600 shadow-sm border border-yellow-200">
-          <Trophy size={32} fill="currentColor" />
-        </div>
-        <h1 className={`${alfa.className} text-3xl md:text-4xl text-slate-900`}>
-          @{vencedor.username} vence a comparação
-        </h1>
-        <p className="text-slate-500 font-medium max-w-md">
-          Venceu por maior consistência e impacto nos repositórios
-        </p>
-      </div>
+    <div className="w-full">
+      <div className="w-full bg-[#f6f2ff] rounded-t-[20px]">
+        <div className="max-w-6xl  bamx-auto px-6 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-4">
+            <div className="bg-orange-400 text-white p-3 rounded-xl shadow-[0_0_12px_rgba(251,146,60,0.6)]">
+              <Trophy size={25} />
+            </div>
 
-      <div className="relative flex flex-col md:flex-row items-center justify-center gap-8 md:gap-4 w-full">
-        {/* Dev 1 Card */}
-        <div className={`relative group flex-1 w-full max-w-sm bg-white/60 backdrop-blur-md rounded-[20px] p-8 border ${score1 > score2 ? 'border-purple-400 shadow-[0_20px_40px_-15px_rgba(123,97,255,0.2)]' : 'border-white/40 shadow-xl'}`}>
-          {score1 > score2 && (
-            <div className="absolute -top-4 -right-4 bg-purple-600 text-white p-2 rounded-xl shadow-lg animate-bounce">
-              <Trophy size={16} />
-            </div>
-          )}
-          <div className="flex flex-col items-center text-center gap-4">
-            <div className={`p-1 rounded-full border-2 ${score1 > score2 ? 'border-purple-500' : 'border-slate-200'}`}>
-              <img src={dev1.avatar} alt={dev1.nome} className="w-24 h-24 rounded-full" />
-            </div>
             <div>
-              <h3 className="text-xl font-bold text-slate-800">{dev1.nome}</h3>
-              <p className="text-purple-600 font-semibold">@{dev1.username}</p>
-            </div>
-            <div className="grid grid-cols-2 gap-4 w-full mt-4">
-              <div className="text-center">
-                <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">Followers</p>
-                <p className="text-slate-800 font-bold">{dev1.seguidores.toLocaleString()}</p>
-              </div>
-              <div className="text-center">
-                <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">Repos</p>
-                <p className="text-slate-800 font-bold">{dev1.repositorios}</p>
-              </div>
-            </div>
-            <div className="w-full h-px bg-slate-100 my-2" />
-            <div className="flex flex-col items-center gap-1">
-              <p className="text-slate-400 text-xs font-bold uppercase">Main Language</p>
-              <span className="px-3 py-1 bg-purple-50 text-purple-600 rounded-full text-sm font-bold border border-purple-100">
-                {dev1.linguagemPrincipal}
-              </span>
-            </div>
-            <div className="mt-4">
-              <p className="text-5xl font-black text-purple-600">{score1}</p>
-              <p className="text-xs font-bold text-slate-400 tracking-widest">PTS</p>
+              <h1 className={`${alfa.className} text-xl text-purple-600 flex items-center gap-2`}>
+                🏆 @{vencedor.username} <p className="text-black">vence a comparação</p>
+              </h1>
+              <Tipografias.TextoPequeno> Venceu por maior consistência e impacto nos repositórios </Tipografias.TextoPequeno>
             </div>
           </div>
-        </div>
 
-        {/* VS Badge */}
-        <div className="z-10 bg-white shadow-2xl border-4 border-[#F5FAFF] w-16 h-16 rounded-full flex items-center justify-center -my-8 md:my-0 md:-mx-8">
-          <span className={`${alfa.className} text-xl bg-gradient-to-br from-purple-600 to-blue-500 bg-clip-text text-transparent`}>VS</span>
-        </div>
-
-        {/* Dev 2 Card */}
-        <div className={`relative group flex-1 w-full max-w-sm bg-white/60 backdrop-blur-md rounded-[20px] p-8 border ${score2 > score1 ? 'border-blue-400 shadow-[0_20px_40px_-15px_rgba(59,130,246,0.2)]' : 'border-white/40 shadow-xl'}`}>
-          {score2 > score1 && (
-            <div className="absolute -top-4 -left-4 bg-blue-600 text-white p-2 rounded-xl shadow-lg animate-bounce">
-              <Trophy size={16} />
-            </div>
-          )}
-          <div className="flex flex-col items-center text-center gap-4">
-            <div className={`p-1 rounded-full border-2 ${score2 > score1 ? 'border-blue-500' : 'border-slate-200'}`}>
-              <img src={dev2.avatar} alt={dev2.nome} className="w-24 h-24 rounded-full" />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold text-slate-800">{dev2.nome}</h3>
-              <p className="text-blue-600 font-semibold">@{dev2.username}</p>
-            </div>
-            <div className="grid grid-cols-2 gap-4 w-full mt-4">
-              <div className="text-center">
-                <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">Followers</p>
-                <p className="text-slate-800 font-bold">{dev2.seguidores.toLocaleString()}</p>
-              </div>
-              <div className="text-center">
-                <p className="text-slate-400 text-xs font-bold uppercase tracking-wider">Repos</p>
-                <p className="text-slate-800 font-bold">{dev2.repositorios}</p>
-              </div>
-            </div>
-            <div className="w-full h-px bg-slate-100 my-2" />
-            <div className="flex flex-col items-center gap-1">
-              <p className="text-slate-400 text-xs font-bold uppercase">Main Language</p>
-              <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm font-bold border border-blue-100">
-                {dev2.linguagemPrincipal}
-              </span>
-            </div>
-            <div className="mt-4">
-              <p className="text-5xl font-black text-blue-600">{score2}</p>
-              <p className="text-xs font-bold text-slate-400 tracking-widest">PTS</p>
-            </div>
+          <div className="flex items-center gap-2 px-4 py-1 rounded-full text-sm font-semibold border border-yellow-600 bg-yellow-100">
+            <Crown size={14} className='text-yellow-600'/>
+            <Tipografias.TextoPequeno className='!text-yellow-600'> 3/5 critérios </Tipografias.TextoPequeno>
           </div>
         </div>
       </div>
+
+      <div className="flex justify-center mt-6">
+        <div className="w-full max-w-6xl bg-white rounded-b-[20px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col gap-6">
+
+          <div className="flex justify-center items-center gap-8">
+            <div className="text-center flex flex-col items-center">
+                <Tipografias.Titulo className='!text-purple-600'>{score1}</Tipografias.Titulo>
+                <Tipografias.TextoPequeno className='!text-[12px] !leading-[14px] '>PTS · A</Tipografias.TextoPequeno>
+                <Tipografias.TextoPequeno className='!text-purple-600'> @{dev1.username}</Tipografias.TextoPequeno>
+            </div>
+
+            <Tipografias.TextoPequeno className='!text-[20px]'>vs</Tipografias.TextoPequeno>
+
+             <div className="text-center flex flex-col items-center">
+              <Tipografias.Titulo className='!text-blue-600'>{score2}</Tipografias.Titulo>
+              <Tipografias.TextoPequeno className='!text-[12px] !leading-[14px] '>PTS · A</Tipografias.TextoPequeno>
+              <Tipografias.TextoPequeno className='!text-blue-600'> @{dev2.username}</Tipografias.TextoPequeno>
+            </div>
+          </div>
+
+          {/* PERFIS */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-10">
+
+            {/* DEV 1 */}
+            <div className="flex flex-col items-center text-center gap-4 w-full max-w-sm">
+              <div className="relative">
+                <img src={dev1.avatar} className="w-24 h-24 rounded-full border-4 border-purple-300"/>
+                {isDev1Winner && (
+                  <div className="absolute -top-2 -right-2 bg-yellow-400 rounded-full p-2 shadow">
+                    <Crown size={16} className="text-white" />
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <Tipografias.TextoMedio className='!text-black'>{dev1.nome}</Tipografias.TextoMedio>             
+                <div className=" w-full rounded-full border text-purple-600 border-purple-600 bg-purple-50">
+                  <Tipografias.TextoPequeno className='!text-purple-600'> @{dev1.username}</Tipografias.TextoPequeno>
+                </div>
+              </div>
+
+              <div className="flex gap-3 w-full">
+                <Metric
+                  label="Seguidores"
+                  value={dev1.seguidores.toLocaleString()}
+                  highlight={dev1.seguidores > dev2.seguidores}
+                />
+                <Metric
+                  label="Repos"
+                  value={dev1.repositorios}
+                  highlight={dev1.repositorios > dev2.repositorios}
+                />
+                <Metric
+                  label="Linguagem"
+                  value={dev1.linguagemPrincipal}
+                />
+              </div>
+            </div>
+
+            {/* VS */}
+            <div className="w-16 h-16 rounded-full p-[3px] bg-gradient-to-br from-purple-400 to-blue-500 shadow-md">
+              <div className="w-full h-full bg-white rounded-full flex items-center justify-center font-bold text-slate-600">
+                VS
+              </div>
+            </div>
+
+            {/* DEV 2 */}
+            <div className="flex flex-col items-center text-center gap-4 w-full max-w-sm">
+              <div className="relative">
+                <img src={dev2.avatar} className="w-24 h-24 rounded-full border-4 border-blue-300"/>
+                {!isDev1Winner && (
+                  <div className="absolute -top-2 -right-2 bg-yellow-400 rounded-full p-2 shadow">
+                    <Crown size={14} className="text-white" />
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <Tipografias.TextoMedio className='!text-black'>{dev2.nome}</Tipografias.TextoMedio>             
+                <div className="rounded-full border text-blue-600 border-blue-600 bg-blue-50">
+                  <Tipografias.TextoPequeno className='!text-blue-600'> @{dev2.username}</Tipografias.TextoPequeno>
+                </div>
+              </div>
+
+              <div className="flex gap-3 w-full">
+                <Metric
+                  label="Seguidores"
+                  value={dev2.seguidores.toLocaleString()}
+                  highlight={dev2.seguidores > dev1.seguidores}
+                />
+                <Metric
+                  label="Repos"
+                  value={dev2.repositorios}
+                  highlight={dev2.repositorios > dev1.repositorios}
+                />
+                <Metric
+                  label="Linguagem"
+                  value={dev2.linguagemPrincipal}
+                  highlight={undefined}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+interface MetricProps {
+  label: string;
+  value: string | number;
+  highlight?: boolean;
+}
+
+const Metric = ({ label, value, highlight } : MetricProps) => {
+  return (
+    <div
+      className={`flex-1 rounded-xl border p-3 flex flex-col items-center justify-center gap-1 ${
+        highlight ? 'bg-[#fefaf1] border-[#fde999]' : 'bg-white border-slate-200'
+      }`}
+    >
+      {highlight && <Crown size={14} className="text-[#bb4d00]" />}
+      <Tipografias.Titulo className={`!text-[18px] ${highlight ? '!text-[#bb4d00]' : '!text-slate-700'} !leading-[22px]`}>    {value} </Tipografias.Titulo>
+      <Tipografias.TextoPequeno className='!text-[12px] !leading-[14px] '> {label}</Tipografias.TextoPequeno>
     </div>
   );
 };

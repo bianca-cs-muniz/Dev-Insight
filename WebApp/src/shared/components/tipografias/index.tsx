@@ -26,6 +26,14 @@ const LegendaPequena = styled(Typography)`
   color: #62748e;           
 `;
 
+const TextoMedio = styled(Typography)`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: #62748e;           
+`;
+
 const TextoPequeno = styled(Typography)`
   font-style: normal;
   font-weight: 600;
@@ -54,6 +62,7 @@ export const Tipografias = {
   Titulo,
   Legenda,
   LegendaPequena,
+  TextoMedio,
   TextoPequeno,
   TextoPequeno16,
   TextoPequenoSimples
