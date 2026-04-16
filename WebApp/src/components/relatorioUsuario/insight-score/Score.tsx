@@ -22,7 +22,7 @@ export const Score = ({ scoreData }: Props) => {
 
       <div>
         <Tipografias.TextoPequeno16 className='!text-black !leading-none'>Dev Score</Tipografias.TextoPequeno16>
-        <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-400'>Pontuação baseada na atividade</Tipografias.TextoPequenoSimples>
+        <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Pontuação baseada na atividade</Tipografias.TextoPequenoSimples>
       </div>
 
       <div className="relative flex items-center justify-center">
@@ -53,7 +53,7 @@ export const Score = ({ scoreData }: Props) => {
           <Tipografias.Titulo className='!text-black !text-3xl !leading-none !font-black'>
             {scoreData.score}
           </Tipografias.Titulo>
-          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-400'>/ 100</Tipografias.TextoPequenoSimples>
+          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>/ 100</Tipografias.TextoPequenoSimples>
         </div>
       </div>
 
@@ -62,23 +62,23 @@ export const Score = ({ scoreData }: Props) => {
           <Tipografias.Titulo className='!text-transparent !bg-clip-text !bg-gradient-to-br !from-purple-500 !to-indigo-500 !text-2xl !leading-none !font-black'>
             {scoreData.nivel}
           </Tipografias.Titulo>
-          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-400'>Classificação</Tipografias.TextoPequenoSimples>
+          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Classificação</Tipografias.TextoPequenoSimples>
         </div>
       </div>
 
       <div className="mt-4 pt-4 border-t border-purple-50 flex flex-col gap-2">
-        <div className="flex justify-between text-xs text-slate-400">
-          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-400'>Estrelas</Tipografias.TextoPequenoSimples>
-          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-400'>{scoreData.breakdown.estrelas}%</Tipografias.TextoPequenoSimples>
+        <div className="flex justify-between text-xs text-slate-600">
+          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Estrelas</Tipografias.TextoPequenoSimples>
+          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>{scoreData.breakdown.estrelas}%</Tipografias.TextoPequenoSimples>
         </div>
         
         <div className="h-1.5 rounded-full bg-purple-50 overflow-hidden">
           <div className="h-full rounded-full bg-purple-400" style={{ width: `${scoreData.breakdown.estrelas}%` }}/>
         </div>
         
-        <div className="flex justify-between text-xs text-slate-400">
-          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-400'>Seguidores</Tipografias.TextoPequenoSimples>
-          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-400'>{scoreData.breakdown.seguidores}%</Tipografias.TextoPequenoSimples>
+        <div className="flex justify-between text-xs text-slate-600">
+          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Seguidores</Tipografias.TextoPequenoSimples>
+          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>{scoreData.breakdown.seguidores}%</Tipografias.TextoPequenoSimples>
         </div>
         
         <div className="h-1.5 rounded-full bg-purple-50 overflow-hidden">

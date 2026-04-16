@@ -4,10 +4,9 @@ import { useSearchParams, usePathname } from 'next/navigation';
 import { BuscarUsuario } from '@components/buscarUsuario';
 import { RelatorioUsuario } from '@components/relatorioUsuario';
 import { CompararUsuario } from '@components/compararUsuario';
-import { RelatorioComparacao } from '@components/relatorioComparacao';
 
 const ROTAS_ESTATICAS: Record<string, React.ReactNode> = {
-  '/comparar-perfis': <RelatorioComparacao />,
+  '/comparar-perfis': <CompararUsuario />,
 };
 
 const resolverComponente = ( pathname: string, searchParams: URLSearchParams ): React.ReactNode =>

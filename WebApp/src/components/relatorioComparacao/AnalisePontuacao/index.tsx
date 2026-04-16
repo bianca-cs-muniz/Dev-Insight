@@ -1,15 +1,16 @@
 'use client';
 
+import { Tipografias } from '@shared/components/tipografias';
 import { 
   Radar, 
   RadarChart, 
   PolarGrid, 
   PolarAngleAxis, 
-  PolarRadiusAxis, 
   ResponsiveContainer 
 } from 'recharts';
 
 interface DevStats {
+  username: string;
   pontuacao: {
     atividade: number;
     popularidade: number;
@@ -26,11 +27,11 @@ interface AnalisePontuacaoProps {
 
 export const AnalisePontuacao = ({ dev1, dev2 }: AnalisePontuacaoProps) => {
   const data = [
-    { subject: 'Atividade', A: dev1.pontuacao.atividade, B: dev2.pontuacao.atividade, fullMark: 100 },
-    { subject: 'Popularidade', A: dev1.pontuacao.popularidade, B: dev2.pontuacao.popularidade, fullMark: 100 },
-    { subject: 'Qualidade', A: dev1.pontuacao.qualidade, B: dev2.pontuacao.qualidade, fullMark: 100 },
-    { subject: 'Consistência', A: dev1.pontuacao.consistencia, B: dev2.pontuacao.consistencia, fullMark: 100 },
-    { subject: 'Stack', A: dev1.pontuacao.stack, B: dev2.pontuacao.stack, fullMark: 100 },
+    { subject: 'Atividade', A: dev1.pontuacao.atividade, B: dev2.pontuacao.atividade },
+    { subject: 'Popularidade', A: dev1.pontuacao.popularidade, B: dev2.pontuacao.popularidade },
+    { subject: 'Qualidade', A: dev1.pontuacao.qualidade, B: dev2.pontuacao.qualidade },
+    { subject: 'Consistência', A: dev1.pontuacao.consistencia, B: dev2.pontuacao.consistencia },
+    { subject: 'Stack', A: dev1.pontuacao.stack, B: dev2.pontuacao.stack },
   ];
 
   const metrics = [
@@ -43,67 +44,81 @@ export const AnalisePontuacao = ({ dev1, dev2 }: AnalisePontuacaoProps) => {
 
   return (
     <div className="bg-white rounded-[20px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col gap-6">
-      <div className="flex flex-col gap-1">
-        <h2 className="text-xl font-bold text-slate-800">Análise de Pontuação</h2>
-        <p className="text-sm text-slate-500">Comparativo técnico detalhado</p>
+      <div className="flex justify-between items-start">
+        <div className="flex flex-col">
+          <Tipografias.TextoMedio className="!text-black !leading-none">
+            Análise de Pontuação
+          </Tipografias.TextoMedio>
+          <Tipografias.TextoPequenoSimples className="!text-[13px] !text-slate-600">
+            Comparativo técnico detalhado
+          </Tipografias.TextoPequenoSimples>
+        </div>
+        <div className="flex gap-4 text-sm font-semibold">
+          <Tipografias.TextoPequeno className="!text-purple-700">@{dev1.username}</Tipografias.TextoPequeno>
+          <Tipografias.TextoPequeno className="!text-blue-500">@{dev2.username}</Tipografias.TextoPequeno>
+        </div>
       </div>
 
-      <div className="flex flex-col xl:flex-row items-center gap-8">
+      <div className="flex flex-col xl:flex-row items-center gap-10">
+        
         <div className="w-full h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
+            <RadarChart cx="50%" cy="50%" outerRadius="75%" data={data}>
               <PolarGrid stroke="#e2e8f0" />
-              <PolarAngleAxis dataKey="subject" tick={{ fill: '#64748b', fontSize: 12, fontWeight: 500 }} />
+              <PolarAngleAxis
+                dataKey="subject"
+                tick={{ fill: '#64748b', fontSize: 12 }}
+              />
               <Radar
-                name="Dev 1"
                 dataKey="A"
                 stroke="#7B61FF"
                 fill="#7B61FF"
-                fillOpacity={0.6}
+                fillOpacity={0.5}
               />
               <Radar
-                name="Dev 2"
                 dataKey="B"
                 stroke="#3B82F6"
                 fill="#3B82F6"
-                fillOpacity={0.6}
+                fillOpacity={0.5}
               />
             </RadarChart>
           </ResponsiveContainer>
         </div>
 
-        <div className="w-full flex flex-col gap-4">
-          {metrics.map((m) => (
-            <div key={m.label} className="flex flex-col gap-2">
-              <div className="flex justify-between text-xs font-bold uppercase tracking-wider text-slate-400">
-                <span>{m.label}</span>
-                <div className="flex gap-4">
-                  <span className="text-purple-600">{m.val1}</span>
-                  <span className="text-blue-600">{m.val2}</span>
+        <div className="w-full flex flex-col gap-1">
+          {metrics.map((m, i) => (
+            <div key={m.label} className="flex flex-col">
+              <div className="flex justify-between items-center">
+                <div className="uppercase tracking-wider">
+                  <Tipografias.TextoPequeno className="!text-[12px]"> {m.label}</Tipografias.TextoPequeno>
+                </div>
+
+                <div className="flex flex-col items-end leading-tight">
+                  <div>
+                    <Tipografias.TextoPequeno className="!text-[12px] !text-purple-700">{m.val1}</Tipografias.TextoPequeno>
+                  </div>
+                  <div>
+                    <Tipografias.TextoPequeno className="!text-[12px] !text-blue-500">{m.val2}</Tipografias.TextoPequeno>
+                  </div>
                 </div>
               </div>
-              <div className="relative h-2 w-full bg-slate-100 rounded-full overflow-hidden flex">
-                <div 
-                  className="h-full bg-purple-500 rounded-l-full transition-all duration-1000" 
-                  style={{ width: `${(m.val1 / (m.val1 + m.val2)) * 100}%` }}
-                />
-                <div 
-                  className="h-full bg-blue-500 rounded-r-full transition-all duration-1000" 
-                  style={{ width: `${(m.val2 / (m.val1 + m.val2)) * 100}%` }}
-                />
+
+              <div className="flex flex-col gap-[8px]">
+                <div className="w-full h-[6px] bg-slate-100 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-purple-500 rounded-full transition-all duration-1000 ease-out"
+                    style={{ width: `${m.val1}%`, transitionDelay: `${i * 120}ms` }}
+                  />
+                </div>
+                <div className="w-full h-[6px] bg-slate-100 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-blue-500 rounded-full transition-all duration-1000 ease-out"
+                    style={{ width: `${m.val2}%`, transitionDelay: `${i * 120 + 80}ms` }}
+                  />
+                </div>
               </div>
             </div>
           ))}
-          <div className="flex justify-center gap-6 mt-2">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-purple-500" />
-              <span className="text-xs font-bold text-slate-600">Dev 1</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-blue-500" />
-              <span className="text-xs font-bold text-slate-600">Dev 2</span>
-            </div>
-          </div>
         </div>
       </div>
     </div>

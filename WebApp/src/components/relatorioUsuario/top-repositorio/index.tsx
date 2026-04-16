@@ -21,7 +21,7 @@ export const TopRepositorios = ({ repositorios }: Props) => {
     <div className="rounded-2xl shadow-md bg-white/80 backdrop-blur-sm border border-purple-100 p-6 h-full flex flex-col">
       <div>
         <Tipografias.TextoPequeno16 className='!text-black !leading-none'>Top Repositórios</Tipografias.TextoPequeno16>
-        <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-400'>Ordenado por estrelas</Tipografias.TextoPequenoSimples>
+        <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Ordenado por estrelas</Tipografias.TextoPequenoSimples>
       </div>
 
       <ul className="flex flex-col gap-3 flex-1">
@@ -46,7 +46,7 @@ export const TopRepositorios = ({ repositorios }: Props) => {
                   {formatarEstrelas(repo.stargazers_count)}
                 </span>
                 
-                <span className="flex items-center gap-1 text-xs text-slate-400 font-medium">
+                <span className="flex items-center gap-1 text-xs text-slate-600 font-medium">
                   <GitFork size={12} />
                   {formatarEstrelas(repo.forks_count)}
                 </span>

@@ -33,7 +33,7 @@ export const Comparar = ({ onCompare }: { onCompare: () => void }) => {
           <div className="flex-1 w-full flex flex-col gap-2 !mt-2">
             <div className="flex items-center gap-1.5">
               <div className="w-2 h-2 rounded-full bg-purple-500" />
-              <label className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">
+              <label className="text-[10px] font-bold tracking-widest text-slate-600 uppercase">
                 DESENVOLVEDOR 1
               </label>
             </div>
@@ -66,7 +66,7 @@ export const Comparar = ({ onCompare }: { onCompare: () => void }) => {
           <div className="flex-1 w-full flex flex-col gap-2">
             <div className="flex items-center gap-1.5">
               <div className="w-2 h-2 rounded-full bg-blue-500" />
-              <label className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">
+              <label className="text-[10px] font-bold tracking-widest text-slate-600 uppercase">
                 DESENVOLVEDOR 2
               </label>
             </div>

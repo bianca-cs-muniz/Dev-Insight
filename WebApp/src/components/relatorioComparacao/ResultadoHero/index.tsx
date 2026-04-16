@@ -48,14 +48,14 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
   return (
     <div className="w-full">
       <div className="w-full bg-[#f6f2ff] rounded-t-[20px]">
-        <div className="max-w-6xl  bamx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-8xl  bamx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <div className="bg-orange-400 text-white p-3 rounded-xl shadow-[0_0_12px_rgba(251,146,60,0.6)]">
               <Trophy size={25} />
             </div>
 
             <div>
-              <h1 className={`${alfa.className} text-xl text-purple-600 flex items-center gap-2`}>
+              <h1 className={`${alfa.className} text-xl text-purple-700 flex items-center gap-2`}>
                 🏆 @{vencedor.username} <p className="text-black">vence a comparação</p>
               </h1>
               <Tipografias.TextoPequeno> Venceu por maior consistência e impacto nos repositórios </Tipografias.TextoPequeno>
@@ -70,13 +70,13 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
       </div>
 
       <div className="flex justify-center mt-6">
-        <div className="w-full max-w-6xl bg-white rounded-b-[20px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col gap-6">
+        <div className="w-full max-w-8xl bg-white rounded-b-[20px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col gap-6">
 
-          <div className="flex justify-center items-center gap-8">
+          <div className="flex justify-center items-center gap-10">
             <div className="text-center flex flex-col items-center">
-                <Tipografias.Titulo className='!text-purple-600'>{score1}</Tipografias.Titulo>
+                <Tipografias.Titulo className='!text-purple-700'>{score1}</Tipografias.Titulo>
                 <Tipografias.TextoPequeno className='!text-[12px] !leading-[14px] '>PTS · A</Tipografias.TextoPequeno>
-                <Tipografias.TextoPequeno className='!text-purple-600'> @{dev1.username}</Tipografias.TextoPequeno>
+                <Tipografias.TextoPequeno className='!text-purple-700'> @{dev1.username}</Tipografias.TextoPequeno>
             </div>
 
             <Tipografias.TextoPequeno className='!text-[20px]'>vs</Tipografias.TextoPequeno>
@@ -88,10 +88,8 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
             </div>
           </div>
 
-          {/* PERFIS */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-15">
 
-            {/* DEV 1 */}
             <div className="flex flex-col items-center text-center gap-4 w-full max-w-sm">
               <div className="relative">
                 <img src={dev1.avatar} className="w-24 h-24 rounded-full border-4 border-purple-300"/>
@@ -103,9 +101,9 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
               </div>
 
               <div>
-                <Tipografias.TextoMedio className='!text-black'>{dev1.nome}</Tipografias.TextoMedio>             
-                <div className=" w-full rounded-full border text-purple-600 border-purple-600 bg-purple-50">
-                  <Tipografias.TextoPequeno className='!text-purple-600'> @{dev1.username}</Tipografias.TextoPequeno>
+                <Tipografias.TextoMedio className='!text-black !leading-[30px]'>{dev1.nome}</Tipografias.TextoMedio>             
+                <div className=" w-full rounded-full border text-purple-700 border-purple-600 bg-purple-50">
+                  <Tipografias.TextoPequeno className='!text-purple-700'> @{dev1.username}</Tipografias.TextoPequeno>
                 </div>
               </div>
 
@@ -127,14 +125,12 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
               </div>
             </div>
 
-            {/* VS */}
             <div className="w-16 h-16 rounded-full p-[3px] bg-gradient-to-br from-purple-400 to-blue-500 shadow-md">
               <div className="w-full h-full bg-white rounded-full flex items-center justify-center font-bold text-slate-600">
-                VS
+               <Tipografias.TextoPequeno>VS</Tipografias.TextoPequeno>
               </div>
             </div>
 
-            {/* DEV 2 */}
             <div className="flex flex-col items-center text-center gap-4 w-full max-w-sm">
               <div className="relative">
                 <img src={dev2.avatar} className="w-24 h-24 rounded-full border-4 border-blue-300"/>
@@ -146,7 +142,7 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
               </div>
 
               <div>
-                <Tipografias.TextoMedio className='!text-black'>{dev2.nome}</Tipografias.TextoMedio>             
+                <Tipografias.TextoMedio className='!text-black !leading-[30px]'>{dev2.nome}</Tipografias.TextoMedio>             
                 <div className="rounded-full border text-blue-600 border-blue-600 bg-blue-50">
                   <Tipografias.TextoPequeno className='!text-blue-600'> @{dev2.username}</Tipografias.TextoPequeno>
                 </div>

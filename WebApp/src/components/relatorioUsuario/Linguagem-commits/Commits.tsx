@@ -18,8 +18,8 @@ const TooltipPersonalizado = ({ active, payload, label }: PropriedadesTooltip) =
   if (!active || !payload?.length) return null;
   return (
     <div className="bg-white/95 border border-purple-100 rounded-xl px-3 py-2 shadow-lg text-xs">
-      <p className="text-slate-400 mb-0.5">{label}</p>
-      <p className="font-bold text-purple-600">{payload[0].value} commits</p>
+      <p className="text-slate-600 mb-0.5">{label}</p>
+      <p className="font-bold text-purple-700">{payload[0].value} commits</p>
     </div>
   );
 }
@@ -29,7 +29,7 @@ export const Commits = ({ commits }: Propriedades) => {
     <div className="rounded-2xl shadow-md bg-white/80 backdrop-blur-sm border border-purple-100 p-6 h-full flex flex-col">
       <div>
         <Tipografias.TextoPequeno16 className='!text-black !leading-none'>Frequência de Commits</Tipografias.TextoPequeno16>
-        <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-400'>Últimas semanas de atividade</Tipografias.TextoPequenoSimples>
+        <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Últimas semanas de atividade</Tipografias.TextoPequenoSimples>
       </div>
 
       <div className="flex-1 min-h-[180px]">
@@ -81,8 +81,8 @@ export const Commits = ({ commits }: Propriedades) => {
 const ResumoCommits = ({ label, value }: { label: string; value: string }) => {
   return (
    <div className="flex flex-col">
-  <Tipografias.TextoPequeno className="!text-slate-400 !text-[11px]">{label}</Tipografias.TextoPequeno>
-  <Tipografias.TextoPequeno className="!text-purple-600 !text-[13px] !leading-none">{value}</Tipografias.TextoPequeno>
+  <Tipografias.TextoPequeno className="!text-slate-600 !text-[11px]">{label}</Tipografias.TextoPequeno>
+  <Tipografias.TextoPequeno className="!text-purple-700 !text-[13px] !leading-none">{value}</Tipografias.TextoPequeno>
 </div>
   );
 }

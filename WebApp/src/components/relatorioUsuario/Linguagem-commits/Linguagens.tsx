@@ -16,7 +16,7 @@ export const Linguagens = ({ linguagens }: Props) => {
 
       <div className="mb-4">
         <Tipografias.TextoPequeno16 className='!text-black !leading-none'>Linguagens</Tipografias.TextoPequeno16>
-        <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-400'>Distribuição por repositórios públicos</Tipografias.TextoPequenoSimples>
+        <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Distribuição por repositórios públicos</Tipografias.TextoPequenoSimples>
       </div>
 
       <div className="flex flex-col sm:flex-row items-center gap-6 flex-1">

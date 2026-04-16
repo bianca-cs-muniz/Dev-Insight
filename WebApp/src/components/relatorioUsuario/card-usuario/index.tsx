@@ -25,10 +25,10 @@ export const CardUsuario = ({  gitHub, followers, following, publicRepos}:
       <div className="rounded-3xl shadow-lg bg-white p-8 w-full flex flex-col gap-4 ">
         <button
           onClick={() => router.back()}
-          className="flex items-center gap-1 text-sm text-slate-400 hover:text-[#605d6b] transition w-fit cursor-pointer"
+          className="flex items-center gap-1 text-sm text-slate-600 hover:text-[#605d6b] transition w-fit cursor-pointer"
         >
           <ArrowLeft size={16} />
-          <Tipografias.TextoPequeno className='text-slate-400 !hover:text-[#605d6b]'>Voltar</Tipografias.TextoPequeno>
+          <Tipografias.TextoPequeno className='text-slate-600 !hover:text-[#605d6b]'>Voltar</Tipografias.TextoPequeno>
         </button>
 
         <div className="flex flex-col sm:flex-row gap-8 items-start">

@@ -50,7 +50,7 @@ export const Snackbar = ({ message, onClose, duration = 5000 }: Props) => {
         <Tipografias.TextoPequeno className="!text-red-600 !font-bold">
           Erro na Busca
         </Tipografias.TextoPequeno>
-        <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+        <span className="text-xs text-slate-500 dark:text-slate-600 font-medium">
           {message}
         </span>
       </div>
@@ -59,7 +59,7 @@ export const Snackbar = ({ message, onClose, duration = 5000 }: Props) => {
         onClick={handleClose}
         className="absolute top-2 right-2 p-1 rounded-lg hover:bg-slate-100 dark:hover:bg-gray-800 transition-colors"
       >
-        <X className="w-3.5 h-3.5 text-slate-400" />
+        <X className="w-3.5 h-3.5 text-slate-600" />
       </button>
     </div>
   );

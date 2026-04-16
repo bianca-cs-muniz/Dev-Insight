@@ -14,7 +14,7 @@ export const Insight = ({ insights, linguagens }: Props) => {
       
       <div className="flex flex-col mb-3">
         <Tipografias.TextoPequeno16 className="!text-black !leading-none">Insights</Tipografias.TextoPequeno16>
-        <Tipografias.TextoPequenoSimples className="!text-[13px] !text-slate-400">Análise automática do perfil</Tipografias.TextoPequenoSimples>
+        <Tipografias.TextoPequenoSimples className="!text-[13px] !text-slate-600">Análise automática do perfil</Tipografias.TextoPequenoSimples>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -33,7 +33,7 @@ export const Insight = ({ insights, linguagens }: Props) => {
         {insights.map((insight, idx) => (
           <div key={idx} className="flex items-start gap-2.5">
             <div className="w-5 h-5 rounded-full bg-purple-50 flex items-center justify-center shrink-0 mt-0.5">
-              <Info size={12} className="text-purple-400" />
+              <Info size={12} className="text-purple-700" />
             </div>
 
             <Tipografias.TextoPequeno16 className="!text-[14px]">
