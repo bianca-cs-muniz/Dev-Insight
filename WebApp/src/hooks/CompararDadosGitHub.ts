@@ -1,0 +1,68 @@
+import { useQuery } from '@tanstack/react-query';
+import compararGitHubService from '../services/compararGitHub.service';
+
+export const useCompararDadosGitHub = (user1: string, user2: string) => {
+  return useQuery({
+    queryKey: ['comparar-github', user1, user2],
+    queryFn: async () => {
+      const response = await compararGitHubService.compararPerfis(user1, user2);
+      const data = response.data;
+      
+      const formatUser = (user: any) => ({
+        nome: user.dados.name || user.dados.login,
+        username: user.dados.login,
+        avatar: user.dados.avatar_url,
+        seguidores: user.dados.followers,
+        repositorios: user.dados.public_repos,
+        linguagemPrincipal: Object.keys(user.linguagens).length > 0 
+          ? Object.keys(user.linguagens).reduce((a, b) => user.linguagens[a] > user.linguagens[b] ? a : b) 
+          : 'Múltiplas',
+        pontuacao: {
+          atividade: user.score.breakdown.atividade || 0,
+          popularidade: user.score.breakdown.estrelas || 0,
+          qualidade: user.score.breakdown.engajamento || 0,
+          consistencia: user.score.breakdown.repos || 0,
+          stack: user.score.breakdown.linguagens || 0,
+        },
+        commitsRecentes: user.repos.reduce((acc: any, curr: any) => acc + (curr.stargazers_count > 0 ? 1 : 0), 0) || 5,
+        starsTotais: user.repos.reduce((acc: any, curr: any) => acc + (curr.stargazers_count || 0), 0),
+        forksTotais: user.repos.reduce((acc: any, curr: any) => acc + (curr.forks_count || 0), 0),
+        linguagens: Object.entries(user.linguagens)
+          .map(([nome, count]: any) => ({ 
+            nome, 
+            porcentagem: Math.round((count / Math.max(1, user.repos.length)) * 100) 
+          }))
+          .sort((a, b) => b.porcentagem - a.porcentagem)
+          .slice(0, 5),
+        projetosDestaque: [...user.repos]
+          .sort((a: any, b: any) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
+          .slice(0, 3)
+          .map((repo: any) => ({
+            nome: repo.name,
+            stars: (repo.stargazers_count || 0) >= 1000 ? ((repo.stargazers_count || 0)/1000).toFixed(1)+'k' : String(repo.stargazers_count || 0),
+            descricao: repo.description || 'Sem descrição',
+            linguagem: repo.language || 'Geral'
+          })),
+      });
+
+      const dev1Formatted = formatUser(data.user1);
+      const dev2Formatted = formatUser(data.user2);
+      
+      const insights = [
+        { texto: `@${dev1Formatted.username} tem ${dev1Formatted.repositorios} repositórios vs ${dev2Formatted.repositorios} de @${dev2Formatted.username}` },
+        { texto: `@${data.vencedor} apresenta um melhor desempenho geral com score ${data.vencedor === data.user1.dados.login ? data.user1.score.score : data.user2.score.score}` },
+        { texto: `@${dev1Formatted.username} usa mais ${dev1Formatted.linguagemPrincipal} enquanto @${dev2Formatted.username} foca em ${dev2Formatted.linguagemPrincipal}` },
+      ];
+
+      const badges = {
+        maisAtivo: data.user1.score.breakdown.atividade > data.user2.score.breakdown.atividade ? data.user1.dados.login : data.user2.dados.login,
+        maisInfluente: data.user1.score.breakdown.estrelas > data.user2.score.breakdown.estrelas ? data.user1.dados.login : data.user2.dados.login,
+        maisConsistente: data.user1.score.breakdown.repos > data.user2.score.breakdown.repos ? data.user1.dados.login : data.user2.dados.login,
+      };
+
+      return { dev1: dev1Formatted, dev2: dev2Formatted, insights, badges };
+    },
+    enabled: !!user1 && !!user2,
+    refetchOnWindowFocus: false,
+  });
+};
