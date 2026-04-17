@@ -51,10 +51,14 @@ export class CompararUsuarios {
       user1: {
         dados: usuario1,
         score: pontuacao1,
+        repos: repositorios1,
+        linguagens: linguagensUsuario1,
       },
       user2: {
         dados: usuario2,
         score: pontuacao2,
+        repos: repositorios2,
+        linguagens: linguagensUsuario2,
       },
       vencedor,
     };
