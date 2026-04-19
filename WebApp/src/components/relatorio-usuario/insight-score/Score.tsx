@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { Tipografias } from '@shared/components/tipografias';
 import { RadialBarChart, RadialBar, ResponsiveContainer } from 'recharts';
 
@@ -10,6 +13,12 @@ interface Props {
 }
 
 export const Score = ({ scoreData }: Props) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const porcentagem = scoreData.score;
 
   const dadosGrafico = [
@@ -27,7 +36,8 @@ export const Score = ({ scoreData }: Props) => {
 
       <div className="relative flex items-center justify-center">
         <div className="w-40 h-40">
-          <ResponsiveContainer width="100%" height="100%">
+          {isMounted && (
+            <ResponsiveContainer width="100%" height="100%">
             <RadialBarChart
               cx="50%"
               cy="50%"
@@ -47,6 +57,7 @@ export const Score = ({ scoreData }: Props) => {
               <RadialBar background dataKey="value" cornerRadius={8} />
             </RadialBarChart>
           </ResponsiveContainer>
+          )}
         </div>
 
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">

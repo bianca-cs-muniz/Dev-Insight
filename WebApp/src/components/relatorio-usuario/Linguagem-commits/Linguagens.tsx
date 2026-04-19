@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { Tipografias } from '@shared/components/tipografias';
 import { CustomLabel, CustomLabelProps } from '@utils/porcentagem';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
@@ -11,6 +14,12 @@ interface Props {
 }
 
 export const Linguagens = ({ linguagens }: Props) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <div className="rounded-2xl shadow-md bg-white/80 backdrop-blur-sm border border-purple-100 p-6 h-full flex flex-col">
 
@@ -22,7 +31,8 @@ export const Linguagens = ({ linguagens }: Props) => {
       <div className="flex flex-col sm:flex-row items-center gap-6 flex-1">
         {/* grafico */}
         <div className="w-full sm:w-44 h-44 shrink-0">
-          <ResponsiveContainer width="100%" height="100%">
+          {isMounted && (
+            <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={linguagens}
@@ -51,6 +61,7 @@ export const Linguagens = ({ linguagens }: Props) => {
               />
             </PieChart>
           </ResponsiveContainer>
+          )}
         </div>
 
         {/* lista */}

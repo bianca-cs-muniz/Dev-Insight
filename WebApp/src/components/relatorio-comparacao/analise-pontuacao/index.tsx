@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Tipografias } from '@shared/components/tipografias';
 import { 
   Radar, 
@@ -26,6 +27,11 @@ interface AnalisePontuacaoProps {
 }
 
 export const AnalisePontuacao = ({ dev1, dev2 }: AnalisePontuacaoProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
   const metricas = [
     { subject: 'Atividade',    val1: dev1.pontuacao.atividade,    val2: dev2.pontuacao.atividade },
     { subject: 'Popularidade', val1: dev1.pontuacao.popularidade, val2: dev2.pontuacao.popularidade },
@@ -56,8 +62,9 @@ export const AnalisePontuacao = ({ dev1, dev2 }: AnalisePontuacaoProps) => {
       <div className="flex flex-col xl:flex-row items-center gap-10">
         
         <div className="w-full h-[300px]">
-          <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="75%" data={radarData}>
+          {isMounted && (
+            <ResponsiveContainer width="100%" height="100%">
+              <RadarChart cx="50%" cy="50%" outerRadius="75%" data={radarData}>
               <PolarGrid stroke="#e2e8f0" />
               <PolarAngleAxis
                 dataKey="subject"
@@ -77,6 +84,7 @@ export const AnalisePontuacao = ({ dev1, dev2 }: AnalisePontuacaoProps) => {
               />
             </RadarChart>
           </ResponsiveContainer>
+          )}
         </div>
 
         <div className="w-full flex flex-col gap-1">

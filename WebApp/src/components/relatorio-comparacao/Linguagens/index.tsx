@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Tipografias } from '@shared/components/tipografias';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
@@ -21,12 +22,19 @@ interface LinguagensProps {
 const COLORS = ['#7B61FF', '#3B82F6', '#6FDAA8', '#FFC542', '#FF8A4C', '#A0A5B0'];
 
 export const Linguagens = ({ dev1, dev2 }: LinguagensProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const renderDonut = (dev: DevStats, colorOffset: number) => (
     <div className="flex items-center gap-6 w-full">
       
       {/* GRÁFICO */}
       <div className="w-[200px] h-[200px] relative shrink-0">
-        <ResponsiveContainer width="100%" height="100%">
+        {isMounted && (
+          <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
               data={dev.linguagens}
@@ -46,6 +54,7 @@ export const Linguagens = ({ dev1, dev2 }: LinguagensProps) => {
             </Pie>
           </PieChart>
         </ResponsiveContainer>
+        )}
 
         {/* CENTRO */}
         <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">

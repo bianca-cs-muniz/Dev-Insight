@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { Tipografias } from '@shared/components/tipografias';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -25,6 +28,12 @@ const TooltipPersonalizado = ({ active, payload, label }: PropriedadesTooltip) =
 }
 
 export const Commits = ({ commits }: Propriedades) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <div className="rounded-2xl shadow-md bg-white/80 backdrop-blur-sm border border-purple-100 p-6 h-full flex flex-col">
       <div>
@@ -33,7 +42,8 @@ export const Commits = ({ commits }: Propriedades) => {
       </div>
 
       <div className="flex-1 min-h-[180px]">
-        <ResponsiveContainer width="100%" height="100%">
+        {isMounted && (
+          <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={commits} margin={{ top: 5, right: 8, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="commitGradient" x1="0" y1="0" x2="0" y2="1">
@@ -67,6 +77,7 @@ export const Commits = ({ commits }: Propriedades) => {
             />
           </AreaChart>
         </ResponsiveContainer>
+        )}
       </div>
 
       <div className="flex gap-4 mt-4 pt-4 border-t border-purple-50">
