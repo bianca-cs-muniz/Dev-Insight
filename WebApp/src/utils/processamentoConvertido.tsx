@@ -2,7 +2,7 @@ import { formatoNumero } from './mascara';
 
 interface Repo {
   language: string | null;
-  pushed_at: string | null;
+  pushed_at?: string | null;
 }
 
 interface LinguagemProcessada {

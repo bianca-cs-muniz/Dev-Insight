@@ -99,7 +99,7 @@ export const Linguagens = ({ dev1, dev2 }: LinguagensProps) => {
         <Tipografias.TextoPequenoSimples className="!text-[13px] !text-slate-600"> Distribuição tecnológica </Tipografias.TextoPequenoSimples>
       </div>
 
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="flex flex-col items-start gap-4">
           <div className="px-3 py-1 bg-purple-50 rounded-full border border-purple-700">
             <Tipografias.TextoPequeno className="!text-purple-700 !leading-none">@{dev1.username}</Tipografias.TextoPequeno>

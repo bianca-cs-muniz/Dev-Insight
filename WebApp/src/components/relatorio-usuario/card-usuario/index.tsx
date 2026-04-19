@@ -1,15 +1,15 @@
 'use client';
 
 import { MapPin, Building2, Link2, Users, UserPlus, GitFork, ArrowLeft } from 'lucide-react';
-import type { GithubUserResponse } from '@services/gitHub.service';
 import { formatoNumero } from '@utils/mascara';
 import { alfa } from '@lib/fonts';
 import { Tipografias } from '@shared/components/tipografias';
 import { useRouter } from 'next/navigation';
+import { GithubUserResponse } from '@shared/types/github';
 
 const MetricCard = ({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) => {
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-50 border border-gray-200 rounded-xl p-3">
+    <div className="flex flex-col items-center justify-center bg-[#F5F5F5] rounded-xl p-3">
       <div className="mb-2">{icon}</div>
       <Tipografias.Titulo className='!text-black sm:!text-2xl'>{value}</Tipografias.Titulo>
       <Tipografias.TextoPequenoSimples>{label}</Tipografias.TextoPequenoSimples>

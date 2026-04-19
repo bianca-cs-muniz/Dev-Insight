@@ -3,8 +3,8 @@
 import { useSearchParams } from 'next/navigation';
 import { useBuscarDadosGitHub } from '@hooks/BuscarDadosGitHub';
 import { CardUsuario } from './card-usuario';
-import { Linguagens } from './linguagem-commits/Linguagens';
-import { Commits } from './linguagem-commits/Commits';
+import { Linguagens } from './Linguagem-commits/Linguagens';
+import { Commits } from './Linguagem-commits/Commits';
 import { TopRepositorios } from './top-repositorio';
 import { Insight } from './insight-score/Insight';
 import { Score } from './insight-score/Score';

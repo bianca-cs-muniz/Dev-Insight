@@ -36,27 +36,35 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
   return (
     <div className="w-full">
       <div className="w-full bg-[#f6f2ff] rounded-t-[20px]">
-        <div className="max-w-8xl  bamx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <div className="bg-orange-400 text-white p-3 rounded-xl shadow-[0_0_12px_rgba(251,146,60,0.6)]">
-              <Trophy size={25} />
+        <div className="max-w-8xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div className="flex items-center gap-4">
+              <div className="bg-orange-400 text-white p-3 rounded-xl shadow-[0_0_12px_rgba(251,146,60,0.6)] shrink-0">
+                <Trophy size={25} />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <h1 className={`${alfa.className} text-xl text-purple-700 flex items-center gap-2 flex-wrap`}>
+                  🏆 @{vencedor.username} <span className="text-black">vence a comparação</span>
+                </h1>
+                <Tipografias.TextoPequeno className="hidden md:block">
+                  Venceu por maior consistência e impacto nos repositórios
+                </Tipografias.TextoPequeno>
+                {/* Chip só aparece aqui no mobile */}
+                <div className="flex md:hidden items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold border border-yellow-600 bg-yellow-100 w-fit">
+                  <Crown size={14} className="text-yellow-600" />
+                  <Tipografias.TextoPequeno className="!text-yellow-600">3/5 critérios</Tipografias.TextoPequeno>
+                </div>
+              </div>
             </div>
 
-            <div>
-              <h1 className={`${alfa.className} text-xl text-purple-700 flex items-center gap-2`}>
-                🏆 @{vencedor.username} <p className="text-black">vence a comparação</p>
-              </h1>
-              <Tipografias.TextoPequeno> Venceu por maior consistência e impacto nos repositórios </Tipografias.TextoPequeno>
+            <div className="hidden md:flex items-center gap-2 px-4 py-1 rounded-full text-sm font-semibold border border-yellow-600 bg-yellow-100">
+              <Crown size={14} className="text-yellow-600" />
+              <Tipografias.TextoPequeno className="!text-yellow-600">3/5 critérios</Tipografias.TextoPequeno>
             </div>
-          </div>
 
-          <div className="flex items-center gap-2 px-4 py-1 rounded-full text-sm font-semibold border border-yellow-600 bg-yellow-100">
-            <Crown size={14} className='text-yellow-600'/>
-            <Tipografias.TextoPequeno className='!text-yellow-600'> 3/5 critérios </Tipografias.TextoPequeno>
           </div>
         </div>
-      </div>
-
+  
       <div className="flex justify-center mt-6">
         <div className="w-full max-w-8xl bg-white rounded-b-[20px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col gap-6">
 
@@ -90,7 +98,7 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
 
               <div>
                 <Tipografias.TextoMedio className='!text-black !leading-[30px]'>{dev1.nome}</Tipografias.TextoMedio>             
-                <div className=" w-full rounded-full border text-purple-700 border-purple-600 bg-purple-50">
+                <div className=" w-full rounded-full px-2 border text-purple-700 border-purple-600 bg-purple-50">
                   <Tipografias.TextoPequeno className='!text-purple-700'> @{dev1.username}</Tipografias.TextoPequeno>
                 </div>
               </div>
@@ -131,7 +139,7 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
 
               <div>
                 <Tipografias.TextoMedio className='!text-black !leading-[30px]'>{dev2.nome}</Tipografias.TextoMedio>             
-                <div className="rounded-full border text-blue-600 border-blue-600 bg-blue-50">
+                <div className="rounded-full border text-blue-600 px-2 border-blue-600 bg-blue-50">
                   <Tipografias.TextoPequeno className='!text-blue-600'> @{dev2.username}</Tipografias.TextoPequeno>
                 </div>
               </div>
