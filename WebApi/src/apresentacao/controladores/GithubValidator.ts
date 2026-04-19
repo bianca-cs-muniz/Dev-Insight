@@ -1,15 +1,21 @@
 import { z } from 'zod';
 
+const usernameSchema = z
+  .string()
+  .min(1, 'username é obrigatório')
+  .max(39, 'username inválido')
+  .regex(/^[a-zA-Z0-9-]+$/, 'username inválido');
+
 export const buscarUsuarioSchema = z.object({
   params: z.object({
-    username: z.string().min(1, 'username é obrigatório').max(40, 'username inválido').regex(/^[a-zA-Z0-9-]+$/, 'username inválido'),
+    username: usernameSchema,
   }),
 });
 
 export const compararUsuariosSchema = z.object({
   query: z.object({
-    user1: z.string().min(1, 'user1 é obrigatório'),
-    user2: z.string().min(1, 'user2 é obrigatório'),
+    user1: usernameSchema,
+    user2: usernameSchema,
   }),
 });
 

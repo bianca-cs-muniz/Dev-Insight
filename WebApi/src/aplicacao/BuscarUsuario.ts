@@ -6,8 +6,10 @@ export class BuscarUsuario {
   constructor(private readonly githubService: GithubService) {}
 
   async execute(nomeUsuario: string) {
-    const usuario = await this.githubService.buscarUsuario(nomeUsuario);
-    const repositorios = await this.githubService.buscarRepos(nomeUsuario);
+    const [usuario, repositorios] = await Promise.all([
+      this.githubService.buscarUsuario(nomeUsuario),
+      this.githubService.buscarRepos(nomeUsuario),
+    ]);
 
     const contagemLinguagens: Record<string, number> = {};
 
@@ -15,7 +17,7 @@ export class BuscarUsuario {
       const linguagem = repositorio.language;
       if (!linguagem) continue;
 
-      contagemLinguagens[linguagem] = (contagemLinguagens[linguagem]?? 0) + 1;
+      contagemLinguagens[linguagem] = (contagemLinguagens[linguagem] ?? 0) + 1;
     }
 
     const dadosFrequencia = { totalUltimosRepos: repositorios.length };

@@ -17,8 +17,8 @@ const MetricCard = ({ icon, label, value }: { icon: React.ReactNode; label: stri
   );
 }
 
-export const CardUsuario = ({  gitHub, followers, following, publicRepos}: 
-  Pick<GithubUserResponse, 'user' | 'followers' | 'following' | 'publicRepos'> & {  gitHub: GithubUserResponse['user'];}) => {
+export const CardUsuario = ({ gitHub, followers, following, publicRepos }:
+  Pick<GithubUserResponse, 'followers' | 'following' | 'publicRepos'> & { gitHub: GithubUserResponse['user'] }) => {
   const router = useRouter();
 
   return (

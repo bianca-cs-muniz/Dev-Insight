@@ -14,7 +14,9 @@ export class GithubService {
   }
 
   async buscarRepos(username: string) {
-    const { data } = await this.client.get(`https://api.github.com/users/${username}/repos`);
+    const { data } = await this.client.get(
+      `https://api.github.com/users/${username}/repos?per_page=100&sort=pushed`
+    );
     return data;
   }
 }

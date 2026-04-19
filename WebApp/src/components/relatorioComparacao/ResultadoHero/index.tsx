@@ -11,6 +11,7 @@ interface DevProps {
   seguidores: number;
   repositorios: number;
   linguagemPrincipal: string;
+  score: number;
   pontuacao: {
     atividade: number;
     popularidade: number;
@@ -26,21 +27,8 @@ interface ResultadoHeroProps {
 }
 
 export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
-  const score1 = Math.round(
-    (dev1.pontuacao.atividade +
-      dev1.pontuacao.popularidade +
-      dev1.pontuacao.qualidade +
-      dev1.pontuacao.consistencia +
-      dev1.pontuacao.stack) / 5
-  );
-
-  const score2 = Math.round(
-    (dev2.pontuacao.atividade +
-      dev2.pontuacao.popularidade +
-      dev2.pontuacao.qualidade +
-      dev2.pontuacao.consistencia +
-      dev2.pontuacao.stack) / 5
-  );
+  const score1 = dev1.score;
+  const score2 = dev2.score;
 
   const vencedor = score1 > score2 ? dev1 : dev2;
   const isDev1Winner = vencedor.username === dev1.username;

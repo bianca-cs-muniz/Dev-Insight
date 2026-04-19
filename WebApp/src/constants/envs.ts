@@ -8,6 +8,3 @@ export const Envs = (() => {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   };
 })();
-
-console.log(process.env.NEXT_PUBLIC_API_URL);
-console.log(Envs.NEXT_PUBLIC_API_URL);

@@ -11,7 +11,7 @@ export const Buscar = () => {
   const [isSearching, setIsSearching] = useState(false)
   const [searchUser, setSearchUser] = useState('')
   const router = useRouter()
-  const sugestões = ['@torvalds', '@gaearon', '@sindresorhus', '@tj', '@yyx990803']
+  const sugestões = ['@bianca-cs-muniz', '@torvalds', '@gaearon', '@sindresorhus', '@tj']
 
   const { perfilGitHub, estaCarregandoPerfilGitHub, errorMsg, setErrorMsg, refetch } = useBuscarDadosGitHub(searchUser);
 

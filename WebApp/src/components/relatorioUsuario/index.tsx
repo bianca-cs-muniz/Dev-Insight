@@ -17,7 +17,7 @@ export const RelatorioUsuario = () => {
 
   if (!perfilGitHub) return null;
 
-  const { user, repos, insights, score } = perfilGitHub;
+  const { repos, insights, score } = perfilGitHub;
   const linguagensProcessadas = processarLinguagens(repos);
   const commitsProcessados = processarCommits(repos);
   const contagemLinguagens = obterContagemLinguagens(repos);
@@ -25,13 +25,12 @@ export const RelatorioUsuario = () => {
   return (
     <div className="min-h-screen w-full py-8">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-30 flex flex-col gap-5">
-        <CardUsuario 
+        <CardUsuario
           gitHub={perfilGitHub.user}
           followers={perfilGitHub.followers}
           following={perfilGitHub.following}
-          publicRepos={perfilGitHub.publicRepos} 
-          user={user}       
-          />
+          publicRepos={perfilGitHub.publicRepos}
+        />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <Linguagens linguagens={linguagensProcessadas} />
           <Commits commits={commitsProcessados} />

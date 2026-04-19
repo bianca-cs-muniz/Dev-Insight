@@ -8,6 +8,18 @@ import { AtSign, GitCompare, Shuffle } from 'lucide-react';
 export const Comparar = ({ onCompare }: { onCompare: (dev1: string, dev2: string) => void }) => {
   const [dev1, setDev1] = useState('');
   const [dev2, setDev2] = useState('');
+  const [erro, setErro] = useState('');
+
+  const handleSubmit = () => {
+    const u1 = dev1.trim().replace('@', '');
+    const u2 = dev2.trim().replace('@', '');
+    if (!u1 || !u2) {
+      setErro('Preencha os dois usernames para comparar.');
+      return;
+    }
+    setErro('');
+    onCompare(u1, u2);
+  };
 
   return (
   <div className="flex flex-col items-center w-full !mt-5 max-w-6xl px-2 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -45,7 +57,8 @@ export const Comparar = ({ onCompare }: { onCompare: (dev1: string, dev2: string
                 type="text"
                 placeholder="Primeiro Usuario..."
                 value={dev1}
-                onChange={(e) => setDev1(e.target.value)}
+                onChange={(e) => { setDev1(e.target.value); setErro(''); }}
+                onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 className="w-full pl-10 pr-6 py-4 rounded-2xl bg-white/50 border border-slate-200 focus:border-purple-400 outline-none transition-all text-slate-700 placeholder:text-slate-300 font-medium"
               />
             </div>
@@ -78,18 +91,22 @@ export const Comparar = ({ onCompare }: { onCompare: (dev1: string, dev2: string
                 type="text"
                 placeholder="Segundo Usuario..."
                 value={dev2}
-                onChange={(e) => setDev2(e.target.value)}
+                onChange={(e) => { setDev2(e.target.value); setErro(''); }}
+                onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
                 className="w-full pl-10 pr-6 py-4 rounded-2xl bg-white/50 border border-slate-200 focus:border-blue-500 outline-none transition-all text-slate-700 placeholder:text-slate-300 font-medium"
               />
             </div>
           </div>
         </div>
 
+        {erro && (
+          <p className="text-center text-sm text-red-500 -mt-5">{erro}</p>
+        )}
+
         <div className="!mt-9 flex justify-center">
-          <button 
-            onClick={() => onCompare(dev1, dev2)}
+          <button
+            onClick={handleSubmit}
             className="group relative w-full md:w-auto min-w-[340px] cursor-pointer"
-            disabled={!dev1 || !dev2}
           >
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity" />
             <div className="relative px-8 py-5 bg-gradient-to-r from-purple-600 to-blue-500 rounded-2xl text-white font-bold text-lg shadow-lg active:scale-[0.98] flex items-center justify-center gap-3 group-hover:brightness-90 transition-all">

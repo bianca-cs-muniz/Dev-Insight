@@ -1,9 +1,10 @@
-import 'dotenv/config'; // ← primeira linha, antes de tudo
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import { routes } from './routes';
 
 const app = express();
+const PORT = process.env.PORT ?? 3009;
 
 app.set('json spaces', 2);
 app.use(cors({
@@ -12,6 +13,6 @@ app.use(cors({
 app.use(express.json());
 app.use(routes);
 
-app.listen(3009, () => {
-  console.log('🚀 API rodando na porta 3009');
+app.listen(PORT, () => {
+  console.log(`🚀 API rodando na porta ${PORT}`);
 });

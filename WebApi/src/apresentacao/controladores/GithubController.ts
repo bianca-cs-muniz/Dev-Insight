@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
 import { BuscarUsuario } from '../../aplicacao/BuscarUsuario';
-import { GithubService } from '../../dominio/servicos/GithubService';
 import AppException from '../../mensagem/app-exception';
 import errors from '../../mensagem/messages';
 import axios from 'axios';
 
 export class GithubController {
-  private useCase = new BuscarUsuario(new GithubService());
+  constructor(private readonly useCase: BuscarUsuario) {}
 
   async buscar(req: Request<{ username: string }>, res: Response) {
     const { username } = req.params;
@@ -22,11 +21,9 @@ export class GithubController {
       if (error instanceof AppException) {
         return res.status(error.status).json({ error: error.message });
       }
-
       if (axios.isAxiosError(error) && error.response?.status === 403) {
         return res.status(403).json({ error: errors.TOKEN_ACABOU });
       }
-
       return res.status(500).json({ error: errors.ERRO_AO_BUSCAR_USUARIO });
     }
   }

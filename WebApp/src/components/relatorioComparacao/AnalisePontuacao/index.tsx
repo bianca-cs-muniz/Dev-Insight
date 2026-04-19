@@ -26,21 +26,15 @@ interface AnalisePontuacaoProps {
 }
 
 export const AnalisePontuacao = ({ dev1, dev2 }: AnalisePontuacaoProps) => {
-  const data = [
-    { subject: 'Atividade', A: dev1.pontuacao.atividade, B: dev2.pontuacao.atividade },
-    { subject: 'Popularidade', A: dev1.pontuacao.popularidade, B: dev2.pontuacao.popularidade },
-    { subject: 'Qualidade', A: dev1.pontuacao.qualidade, B: dev2.pontuacao.qualidade },
-    { subject: 'Consistência', A: dev1.pontuacao.consistencia, B: dev2.pontuacao.consistencia },
-    { subject: 'Stack', A: dev1.pontuacao.stack, B: dev2.pontuacao.stack },
+  const metricas = [
+    { subject: 'Atividade',    val1: dev1.pontuacao.atividade,    val2: dev2.pontuacao.atividade },
+    { subject: 'Popularidade', val1: dev1.pontuacao.popularidade, val2: dev2.pontuacao.popularidade },
+    { subject: 'Qualidade',    val1: dev1.pontuacao.qualidade,    val2: dev2.pontuacao.qualidade },
+    { subject: 'Consistência', val1: dev1.pontuacao.consistencia, val2: dev2.pontuacao.consistencia },
+    { subject: 'Stack',        val1: dev1.pontuacao.stack,        val2: dev2.pontuacao.stack },
   ];
 
-  const metrics = [
-    { label: 'Atividade', val1: dev1.pontuacao.atividade, val2: dev2.pontuacao.atividade },
-    { label: 'Popularidade', val1: dev1.pontuacao.popularidade, val2: dev2.pontuacao.popularidade },
-    { label: 'Qualidade', val1: dev1.pontuacao.qualidade, val2: dev2.pontuacao.qualidade },
-    { label: 'Consistência', val1: dev1.pontuacao.consistencia, val2: dev2.pontuacao.consistencia },
-    { label: 'Stack', val1: dev1.pontuacao.stack, val2: dev2.pontuacao.stack },
-  ];
+  const radarData = metricas.map((m) => ({ subject: m.subject, A: m.val1, B: m.val2 }));
 
   return (
     <div className="bg-white rounded-[20px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col gap-6">
@@ -63,7 +57,7 @@ export const AnalisePontuacao = ({ dev1, dev2 }: AnalisePontuacaoProps) => {
         
         <div className="w-full h-[300px]">
           <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="75%" data={data}>
+            <RadarChart cx="50%" cy="50%" outerRadius="75%" data={radarData}>
               <PolarGrid stroke="#e2e8f0" />
               <PolarAngleAxis
                 dataKey="subject"
@@ -86,11 +80,11 @@ export const AnalisePontuacao = ({ dev1, dev2 }: AnalisePontuacaoProps) => {
         </div>
 
         <div className="w-full flex flex-col gap-1">
-          {metrics.map((m, i) => (
-            <div key={m.label} className="flex flex-col">
+          {metricas.map((m, i) => (
+            <div key={m.subject} className="flex flex-col">
               <div className="flex justify-between items-center">
                 <div className="uppercase tracking-wider">
-                  <Tipografias.TextoPequeno className="!text-[12px]"> {m.label}</Tipografias.TextoPequeno>
+                  <Tipografias.TextoPequeno className="!text-[12px]"> {m.subject}</Tipografias.TextoPequeno>
                 </div>
 
                 <div className="flex flex-col items-end leading-tight">

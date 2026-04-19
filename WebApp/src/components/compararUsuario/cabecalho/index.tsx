@@ -5,11 +5,14 @@ import { Tipografias } from '@shared/components/tipografias';
 import { GitHubIcon } from '@shared/icons';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export const Cabecalho = () => {
 
+  const router = useRouter();
+
   const handleVoltar = () => {
-    window.history.back();
+    router.push('/');
   };
 
   return (

@@ -9,17 +9,21 @@ const ROTAS_ESTATICAS: Record<string, React.ReactNode> = {
   '/comparar-perfis': <CompararUsuario />,
 };
 
-const resolverComponente = ( pathname: string, searchParams: URLSearchParams ): React.ReactNode =>
-  ROTAS_ESTATICAS[pathname] ?? (searchParams.get('gitHub') ? <RelatorioUsuario /> : <BuscarUsuario />
-);
+const resolverComponente = (
+  pathname: string,
+  searchParams: URLSearchParams
+): React.ReactNode =>
+  ROTAS_ESTATICAS[pathname] ??
+  (searchParams.get('gitHub') ? <RelatorioUsuario /> : <BuscarUsuario />);
 
-export const Router = () => {
+const RouterContent = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-
-  return (
-    <Suspense>
-      {resolverComponente(pathname, searchParams)}
-    </Suspense>
-  );
+  return <>{resolverComponente(pathname, searchParams)}</>;
 };
+
+export const Router = () => (
+  <Suspense>
+    <RouterContent />
+  </Suspense>
+);
