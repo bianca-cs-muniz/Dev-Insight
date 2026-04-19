@@ -1,13 +1,13 @@
 import { IGithubRepository } from '../dominio/repositorios/IGithubRepository';
-import { GerarInsights } from '../dominio/utils/GerarInsights';
-import { GithubScoreIA } from '../dominio/utils/GithubScoreIA';
+import { IGerarInsights } from '../dominio/servicos/IGerarInsights';
+import { IGithubScoreIA } from '../dominio/servicos/IGithubScoreIA';
 import { LinguagemUtils } from '../dominio/utils/LinguagemUtils';
 
 export class BuscarUsuario {
   constructor(
     private readonly githubRepository: IGithubRepository,
-    private readonly gerarInsights: GerarInsights,
-    private readonly githubScoreIA: GithubScoreIA,
+    private readonly gerarInsights: IGerarInsights,
+    private readonly githubScoreIA: IGithubScoreIA,
   ) {}
 
   async execute(nomeUsuario: string) {

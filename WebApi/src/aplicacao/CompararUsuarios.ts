@@ -1,11 +1,11 @@
 import { IGithubRepository } from '../dominio/repositorios/IGithubRepository';
-import { GithubScoreIA } from '../dominio/utils/GithubScoreIA';
+import { IGithubScoreIA } from '../dominio/servicos/IGithubScoreIA';
 import { LinguagemUtils } from '../dominio/utils/LinguagemUtils';
 
 export class CompararUsuarios {
   constructor(
     private readonly githubRepository: IGithubRepository,
-    private readonly githubScoreIA: GithubScoreIA,
+    private readonly githubScoreIA: IGithubScoreIA,
   ) {}
 
   async execute(nomeUsuario1: string, nomeUsuario2: string) {

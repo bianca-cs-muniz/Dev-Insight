@@ -3,15 +3,16 @@ import { ComparacaoController } from '../../apresentacao/controladores/Comparaca
 import { GithubController } from '../../apresentacao/controladores/GithubController';
 import { buscarUsuarioSchema, compararUsuariosSchema } from '../../apresentacao/controladores/GithubValidator';
 import { validate } from '../../apresentacao/middlewares/Validate';
-import { GithubRepository } from '../../infra/http/GithubRepository';
+import { GithubRepository } from '../repositories/GithubRepository';
 import { BuscarUsuario } from '../../aplicacao/BuscarUsuario';
 import { CompararUsuarios } from '../../aplicacao/CompararUsuarios';
-import { GithubCache } from '../../infra/cache/GithubCache';
+import { GithubCache } from '../cache/GithubCache';
 import { GerarInsights } from '../../dominio/utils/GerarInsights';
 import { GithubScoreIA } from '../../dominio/utils/GithubScoreIA';
 
 const routes = Router();
 
+// Composição das dependências (Manual DI)
 const githubCache = new GithubCache();
 const gerarInsights = new GerarInsights();
 const githubScoreIA = new GithubScoreIA();

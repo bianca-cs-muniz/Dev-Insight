@@ -1,12 +1,18 @@
-class AppException extends Error {
-  public status;
-  public message;
-
-  constructor(status: number, message: string) {
+export default class AppException extends Error {
+  constructor(public readonly status: number, public readonly message: string) {
     super(message);
-    this.status = status;
-    this.message = message;
+    this.name = 'AppException';
   }
 }
 
-export default AppException;
+export class RateLimitException extends AppException {
+  constructor() {
+    super(403, 'Limite de requisições ao GitHub atingido. Tente novamente mais tarde.');
+  }
+}
+
+export class NotFoundException extends AppException {
+  constructor(message: string) {
+    super(404, message);
+  }
+}

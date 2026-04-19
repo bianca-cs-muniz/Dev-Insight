@@ -1,22 +1,20 @@
-export class GithubCache {
-  private cache = new Map<string, { data: any; expiresAt: number }>();
+import Redis from 'ioredis';
+import { ICache } from '../../dominio/cache/ICache';
 
-  get<T>(key: string): T | null {
-    const entry = this.cache.get(key);
-    if (!entry) return null;
+export class GithubCache implements ICache {
+  private redis: Redis;
 
-    if (Date.now() > entry.expiresAt) {
-      this.cache.delete(key);
-      return null;
-    }
-
-    return entry.data as T;
+  constructor() {
+    this.redis = new Redis(process.env.REDIS_URL || 'redis://localhost:6379');
   }
 
-  set(key: string, data: any, ttlMs = 5 * 60 * 1000): void {
-    this.cache.set(key, {
-      data,
-      expiresAt: Date.now() + ttlMs,
-    });
+  async get<T>(key: string): Promise<T | null> {
+    const cached = await this.redis.get(key);
+    if (!cached) return null;
+    return JSON.parse(cached) as T;
+  }
+
+  async set(key: string, data: any, ttlSeconds = 300): Promise<void> {
+    await this.redis.set(key, JSON.stringify(data), 'EX', ttlSeconds);
   }
 }

@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Cabecalho } from './cabecalho';
 import { Comparar } from './comparar';
-import { RelatorioComparacao } from '../relatorioComparacao';
+import { RelatorioComparacao } from '@components/relatorio-comparacao';
 
 export const CompararUsuarioContent = () => {
   const router = useRouter();

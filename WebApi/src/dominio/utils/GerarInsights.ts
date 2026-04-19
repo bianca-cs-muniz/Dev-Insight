@@ -1,6 +1,7 @@
+import { IGerarInsights } from "../servicos/IGerarInsights";
 import { GithubUser, GithubRepo } from "../tipos/Github";
 
-export class GerarInsights {
+export class GerarInsights implements IGerarInsights {
   executar(user: GithubUser, repos: GithubRepo[], linguagens: Record<string, number>, freq: { totalUltimosRepos: number }): string[] {
     const linguagemPrincipal = Object.keys(linguagens).reduce((a, b) => (linguagens[a] > linguagens[b] ? a : b), '');
 

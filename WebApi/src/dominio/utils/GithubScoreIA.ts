@@ -1,3 +1,4 @@
+import { IGithubScoreIA } from "../servicos/IGithubScoreIA";
 import { GithubUser, GithubRepo } from "../tipos/Github";
 
 type Linguagens = Record<string, number>;
@@ -5,7 +6,7 @@ type Frequencia = { totalUltimosRepos: number };
 type Nivel = 'Iniciante' | 'Intermediário' | 'Avançado' | 'Especialista';
 type ResultadoScore = { score: number; nivel: Nivel; breakdown: Record<string, number> };
 
-export class GithubScoreIA {
+export class GithubScoreIA implements IGithubScoreIA {
   private normalizar = (valor: number, divisor: number) =>
     Math.log10(valor + 1) / Math.log10(divisor + 1);
 

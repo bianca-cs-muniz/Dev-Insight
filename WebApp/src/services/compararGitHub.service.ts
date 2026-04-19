@@ -1,22 +1,5 @@
 import { httpClient } from "./httpClient";
-import { GithubUser, GithubRepo } from "./gitHub.service";
-
-export interface GithubCompareUser {
-  dados: GithubUser;
-  score: {
-    score: number;
-    nivel: string;
-    breakdown: Record<string, number>;
-  };
-  repos: GithubRepo[];
-  linguagens: Record<string, number>;
-}
-
-export interface GithubCompareResponse {
-  user1: GithubCompareUser;
-  user2: GithubCompareUser;
-  vencedor: string;
-}
+import { GithubCompareResponse } from "../shared/types/github";
 
 class CompararGitHubService {
   httpClient;

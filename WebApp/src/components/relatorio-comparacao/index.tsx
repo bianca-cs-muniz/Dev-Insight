@@ -5,10 +5,10 @@ import { AnalisePontuacao } from './analise-pontuacao';
 import { ComparacaoDireta } from './comparacao-direta';
 import { Linguagens } from './Linguagens';
 import { ProjetosDestaque } from './ProjetosDestaque';
-import { Insights } from './insights';
-import { Badges } from './badges';
+import { Insights } from './Insights';
+import { Badges } from './Badges';
 import { useCompararDadosGitHub } from '../../hooks/CompararDadosGitHub';
-import { ArrowLeft, RefreshCw } from 'lucide-react';
+import { RefreshCw } from 'lucide-react';
 
 interface RelatorioComparacaoProps {
   user1: string;
