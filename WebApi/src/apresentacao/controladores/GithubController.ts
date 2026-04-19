@@ -9,11 +9,6 @@ export class GithubController {
 
   async buscar(req: Request<{ username: string }>, res: Response) {
     const { username } = req.params;
-
-    if (!username) {
-      return res.status(400).json({ error: errors.USUARIO_OBRIGATORIO });
-    }
-
     try {
       const data = await this.useCase.execute(username);
       return res.json(data);

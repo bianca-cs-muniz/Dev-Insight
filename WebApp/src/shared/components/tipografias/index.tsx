@@ -1,62 +1,54 @@
 'use client';
 
-import { styled, Typography } from '@mui/material';
+import { ReactNode } from 'react';
 
-const Titulo = styled(Typography)`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 38px;
-  color: #1e293b;
-`;
+interface TypographyProps {
+  children: ReactNode;
+  className?: string;
+  id?: string;
+}
 
-const Legenda = styled(Typography)`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 24px;
-  color: #62748e;
-`;
+const Titulo = ({ children, className, id }: TypographyProps) => (
+  <h1 id={id} className={`font-semibold text-[36px] leading-[38px] text-[#1e293b] ${className || ''}`}>
+    {children}
+  </h1>
+);
 
-const LegendaPequena = styled(Typography)`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  color: #62748e;           
-`;
+const Legenda = ({ children, className, id }: TypographyProps) => (
+  <p id={id} className={`font-normal text-[18px] leading-[24px] text-[#62748e] ${className || ''}`}>
+    {children}
+  </p>
+);
 
-const TextoMedio = styled(Typography)`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  color: #62748e;           
-`;
+const LegendaPequena = ({ children, className, id }: TypographyProps) => (
+  <p id={id} className={`font-semibold text-[18px] leading-[24px] text-[#62748e] ${className || ''}`}>
+    {children}
+  </p>
+);
 
-const TextoPequeno = styled(Typography)`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 24px;
-  color: #62748e;           
-`;
+const TextoMedio = ({ children, className, id }: TypographyProps) => (
+  <p id={id} className={`font-semibold text-[20px] leading-[24px] text-[#62748e] ${className || ''}`}>
+    {children}
+  </p>
+);
 
-const TextoPequeno16 = styled(Typography)`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 24px;
-  color: #62748e;           
-`;
+const TextoPequeno = ({ children, className, id }: TypographyProps) => (
+  <p id={id} className={`font-semibold text-[14px] leading-[24px] text-[#62748e] ${className || ''}`}>
+    {children}
+  </p>
+);
 
-const TextoPequenoSimples = styled(Typography)`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 24px;
-  color: #62748e;           
-`;
+const TextoPequeno16 = ({ children, className, id }: TypographyProps) => (
+  <p id={id} className={`font-semibold text-[16px] leading-[24px] text-[#62748e] ${className || ''}`}>
+    {children}
+  </p>
+);
+
+const TextoPequenoSimples = ({ children, className, id }: TypographyProps) => (
+  <p id={id} className={`font-normal text-[14px] leading-[24px] text-[#62748e] ${className || ''}`}>
+    {children}
+  </p>
+);
 
 export const Tipografias = {
   Titulo,

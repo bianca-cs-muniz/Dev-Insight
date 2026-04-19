@@ -26,8 +26,9 @@ class CompararGitHubService {
   }
 
   async compararPerfis(user1: string, user2: string) {
+    const params = new URLSearchParams({ user1, user2 });
     return await this.httpClient.get<GithubCompareResponse>(
-      `/comparar?user1=${user1}&user2=${user2}`,
+      `/comparar?${params.toString()}`,
     );
   }
 }

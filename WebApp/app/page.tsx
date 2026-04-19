@@ -1,7 +1,21 @@
-// app/page.tsx
+'use client';
 
-import { Router } from "Router";
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { BuscarUsuario } from '@components/buscar-usuario';
+import { RelatorioUsuario } from '@components/relatorio-usuario';
 
-export default function Page() {
-  return <Router />;
+function HomeContent() {
+  const searchParams = useSearchParams();
+  const hasGitHub = !!searchParams.get('gitHub');
+
+  return hasGitHub ? <RelatorioUsuario /> : <BuscarUsuario />;
+}
+
+export default function HomePage() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
+  );
 }

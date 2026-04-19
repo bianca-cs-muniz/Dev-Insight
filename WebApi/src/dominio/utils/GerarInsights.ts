@@ -1,5 +1,7 @@
+import { GithubUser, GithubRepo } from "../tipos/Github";
+
 export class GerarInsights {
-  static executar(user: any, repos: any[], linguagens: Record<string, number>, freq: { totalUltimosRepos: number }): string[] {
+  executar(user: GithubUser, repos: GithubRepo[], linguagens: Record<string, number>, freq: { totalUltimosRepos: number }): string[] {
     const linguagemPrincipal = Object.keys(linguagens).reduce((a, b) => (linguagens[a] > linguagens[b] ? a : b), '');
 
     return [

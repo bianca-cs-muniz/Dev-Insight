@@ -1,51 +1,44 @@
-import { GithubService } from '../dominio/servicos/GithubService';
+import { IGithubRepository } from '../dominio/repositorios/IGithubRepository';
 import { GithubScoreIA } from '../dominio/utils/GithubScoreIA';
+import { LinguagemUtils } from '../dominio/utils/LinguagemUtils';
 
 export class CompararUsuarios {
-  constructor(private readonly githubService: GithubService) {}
+  constructor(
+    private readonly githubRepository: IGithubRepository,
+    private readonly githubScoreIA: GithubScoreIA,
+  ) {}
 
   async execute(nomeUsuario1: string, nomeUsuario2: string) {
-    const [usuario1, usuario2] = await Promise.all([
-      this.githubService.buscarUsuario(nomeUsuario1),
-      this.githubService.buscarUsuario(nomeUsuario2),
+    const [usuario1, usuario2, repositorios1, repositorios2] = await Promise.all([
+      this.githubRepository.buscarUsuario(nomeUsuario1),
+      this.githubRepository.buscarUsuario(nomeUsuario2),
+      this.githubRepository.buscarRepos(nomeUsuario1),
+      this.githubRepository.buscarRepos(nomeUsuario2),
     ]);
 
-    const [repositorios1, repositorios2] = await Promise.all([
-      this.githubService.buscarRepos(nomeUsuario1),
-      this.githubService.buscarRepos(nomeUsuario2),
-    ]);
+    const linguagensUsuario1 = LinguagemUtils.contar(repositorios1);
+    const linguagensUsuario2 = LinguagemUtils.contar(repositorios2);
 
-    const contarLinguagens = (repositorios: any[]) => {
-      const contagem: Record<string, number> = {};
-
-      for (const repo of repositorios) {
-        const linguagem = repo.language;
-        if (!linguagem) continue;
-
-        contagem[linguagem] = (contagem[linguagem]?? 0) + 1;
-      }
-
-      return contagem;
-    };
-
-    const linguagensUsuario1 = contarLinguagens(repositorios1);
-    const linguagensUsuario2 = contarLinguagens(repositorios2);
-
-    const pontuacao1 = GithubScoreIA.calcular(
+    const pontuacao1 = this.githubScoreIA.calcular(
       usuario1,
       repositorios1,
       linguagensUsuario1,
       { totalUltimosRepos: repositorios1.length }
     );
 
-    const pontuacao2 = GithubScoreIA.calcular(
+    const pontuacao2 = this.githubScoreIA.calcular(
       usuario2,
       repositorios2,
       linguagensUsuario2,
       { totalUltimosRepos: repositorios2.length }
     );
 
-    const vencedor = pontuacao1.score > pontuacao2.score? nomeUsuario1 : nomeUsuario2;
+    let vencedor = 'empate';
+    if (pontuacao1.score > pontuacao2.score) {
+      vencedor = nomeUsuario1;
+    } else if (pontuacao2.score > pontuacao1.score) {
+      vencedor = nomeUsuario2;
+    }
 
     return {
       user1: {

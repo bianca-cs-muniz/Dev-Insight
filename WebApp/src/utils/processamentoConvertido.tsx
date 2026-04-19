@@ -1,3 +1,5 @@
+import { formatoNumero } from './mascara';
+
 interface Repo {
   language: string | null;
   pushed_at: string | null;
@@ -63,17 +65,27 @@ export const processarCommits = (repositorios: Repo[]): CommitProcessado[] => {
 
   repositorios.forEach((repo) => {
     if (repo.pushed_at) {
-      const dataFormatada = new Date(repo.pushed_at).toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: 'short',
-      });
-      mapaAtividades[dataFormatada] = (mapaAtividades[dataFormatada] || 0) + 1;
+      const data = new Date(repo.pushed_at);
+      data.setHours(0, 0, 0, 0);
+      const timestamp = data.getTime();
+      mapaAtividades[timestamp] = (mapaAtividades[timestamp] || 0) + 1;
     }
   });
 
   return Object.entries(mapaAtividades)
-   .map(([data, commits]) => ({ data, commits }))
-   .slice(-12);
+    .map(([timestamp, commits]) => ({
+      timestamp: Number(timestamp),
+      commits,
+    }))
+    .sort((a, b) => a.timestamp - b.timestamp)
+    .slice(-12)
+    .map((item) => ({
+      data: new Date(item.timestamp).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: 'short',
+      }),
+      commits: item.commits,
+    }));
 }
 
 export const obterContagemLinguagens = (repositorios: Repo[]): Record<string, number> => {
@@ -86,7 +98,4 @@ export const obterContagemLinguagens = (repositorios: Repo[]): Record<string, nu
   return contagem;
 }
 
-export const formatarEstrelas = (numero: number): string => {
-  if (numero >= 1000) return `${(numero / 1000).toFixed(1)}k`;
-  return String(numero);
-}
+export const formatarEstrelas = formatoNumero;

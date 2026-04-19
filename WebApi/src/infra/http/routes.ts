@@ -3,15 +3,28 @@ import { ComparacaoController } from '../../apresentacao/controladores/Comparaca
 import { GithubController } from '../../apresentacao/controladores/GithubController';
 import { buscarUsuarioSchema, compararUsuariosSchema } from '../../apresentacao/controladores/GithubValidator';
 import { validate } from '../../apresentacao/middlewares/Validate';
-import { GithubService } from '../../dominio/servicos/GithubService';
+import { GithubRepository } from '../../infra/http/GithubRepository';
 import { BuscarUsuario } from '../../aplicacao/BuscarUsuario';
 import { CompararUsuarios } from '../../aplicacao/CompararUsuarios';
+import { GithubCache } from '../../infra/cache/GithubCache';
+import { GerarInsights } from '../../dominio/utils/GerarInsights';
+import { GithubScoreIA } from '../../dominio/utils/GithubScoreIA';
 
 const routes = Router();
 
-const githubService = new GithubService();
-const githubController = new GithubController(new BuscarUsuario(githubService));
-const comparacaoController = new ComparacaoController(new CompararUsuarios(githubService));
+const githubCache = new GithubCache();
+const gerarInsights = new GerarInsights();
+const githubScoreIA = new GithubScoreIA();
+
+const githubRepository = new GithubRepository(githubCache);
+
+const githubController = new GithubController(
+  new BuscarUsuario(githubRepository, gerarInsights, githubScoreIA)
+);
+
+const comparacaoController = new ComparacaoController(
+  new CompararUsuarios(githubRepository, githubScoreIA)
+);
 
 routes.get('/github/:username', validate(buscarUsuarioSchema), githubController.buscar.bind(githubController));
 routes.get('/comparar', validate(compararUsuariosSchema), comparacaoController.comparar.bind(comparacaoController));

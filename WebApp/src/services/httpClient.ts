@@ -10,7 +10,8 @@ export const httpClient = axios.create({
 });
 
 httpClient.interceptors.request.use((config) => {
-  const token = localStorageService.getToken();
+  const isBrowser = typeof window !== 'undefined';
+  const token = isBrowser ? localStorageService.getToken() : null;
   if (token) config.headers.Authorization = `Bearer ${token}`;
 
   if (config.data instanceof FormData) {

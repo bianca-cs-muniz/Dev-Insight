@@ -1,14 +1,16 @@
+import { GithubUser, GithubRepo } from "../tipos/Github";
+
 type Linguagens = Record<string, number>;
 type Frequencia = { totalUltimosRepos: number };
 type Nivel = 'Iniciante' | 'Intermediário' | 'Avançado' | 'Especialista';
 type ResultadoScore = { score: number; nivel: Nivel; breakdown: Record<string, number> };
 
 export class GithubScoreIA {
-  private static normalizar = (valor: number, divisor: number) =>
+  private normalizar = (valor: number, divisor: number) =>
     Math.log10(valor + 1) / Math.log10(divisor + 1);
 
-  static calcular(user: any, repos: any[], linguagens: Linguagens, freq: Frequencia): ResultadoScore {
-    const norm = GithubScoreIA.normalizar;
+  calcular(user: GithubUser, repos: GithubRepo[], linguagens: Linguagens, freq: Frequencia): ResultadoScore {
+    const norm = this.normalizar;
 
     const metricas = {
       repos:       { valor: repos.length,                                              max: 200,   peso: 0.15 },
