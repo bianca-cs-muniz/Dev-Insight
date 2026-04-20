@@ -17,6 +17,9 @@ export interface GithubRepo {
   stargazers_count: number;
   forks_count: number;
   pushed_at: string;
+  created_at: string;
+  size: number;
   description: string | null;
   html_url: string;
+  fork: boolean;
 }

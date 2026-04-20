@@ -9,28 +9,40 @@ export class CompararUsuarios {
   ) {}
 
   async execute(nomeUsuario1: string, nomeUsuario2: string) {
-    const [usuario1, usuario2, repositorios1, repositorios2] = await Promise.all([
+    const [usuario1, usuario2, repositorios1, repositorios2, eventos1, eventos2] = await Promise.all([
       this.githubRepository.buscarUsuario(nomeUsuario1),
       this.githubRepository.buscarUsuario(nomeUsuario2),
       this.githubRepository.buscarRepos(nomeUsuario1),
       this.githubRepository.buscarRepos(nomeUsuario2),
+      this.githubRepository.buscarEventos(nomeUsuario1),
+      this.githubRepository.buscarEventos(nomeUsuario2),
     ]);
 
     const linguagensUsuario1 = LinguagemUtils.contar(repositorios1);
     const linguagensUsuario2 = LinguagemUtils.contar(repositorios2);
 
+    const processarFrequencia = (eventos: any[], repos: any[]) => {
+      const pushEvents = eventos.filter(e => e.type === 'PushEvent');
+      const totalCommits = pushEvents.reduce((acc, e) => acc + (e.payload?.commits?.length || 0), 0);
+      const diasAtivos = new Set(eventos.map(e => new Date(e.created_at).toDateString())).size;
+      return { totalUltimosRepos: repos.length, diasAtivos, totalCommits };
+    };
+
+    const freq1 = processarFrequencia(eventos1, repositorios1);
+    const freq2 = processarFrequencia(eventos2, repositorios2);
+
     const pontuacao1 = this.githubScoreIA.calcular(
       usuario1,
       repositorios1,
       linguagensUsuario1,
-      { totalUltimosRepos: repositorios1.length }
+      freq1
     );
 
     const pontuacao2 = this.githubScoreIA.calcular(
       usuario2,
       repositorios2,
       linguagensUsuario2,
-      { totalUltimosRepos: repositorios2.length }
+      freq2
     );
 
     let vencedor = 'empate';

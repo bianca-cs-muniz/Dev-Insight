@@ -8,6 +8,7 @@ import { Commits } from './Linguagem-commits/Commits';
 import { TopRepositorios } from './top-repositorio';
 import { Insight } from './insight-score/Insight';
 import { Score } from './insight-score/Score';
+import { CardEsforco } from './card-esforco';
 import { processarLinguagens, processarCommits, obterContagemLinguagens } from '@utils/processamentoConvertido';
 
 export const RelatorioUsuario = () => {
@@ -44,6 +45,7 @@ export const RelatorioUsuario = () => {
           <div className="flex flex-col gap-5">
             <Insight insights={insights} linguagens={contagemLinguagens} />
             <Score scoreData={score} />
+            <CardEsforco repos={repos} atividadeScore={score.breakdown.atividade} />
           </div>
         </div>
       </div>

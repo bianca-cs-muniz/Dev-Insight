@@ -33,11 +33,11 @@ export const AnalisePontuacao = ({ dev1, dev2 }: AnalisePontuacaoProps) => {
     setIsMounted(true);
   }, []);
   const metricas = [
-    { subject: 'Atividade',    val1: dev1.pontuacao.atividade,    val2: dev2.pontuacao.atividade },
-    { subject: 'Popularidade', val1: dev1.pontuacao.popularidade, val2: dev2.pontuacao.popularidade },
-    { subject: 'Qualidade',    val1: dev1.pontuacao.qualidade,    val2: dev2.pontuacao.qualidade },
-    { subject: 'Consistência', val1: dev1.pontuacao.consistencia, val2: dev2.pontuacao.consistencia },
-    { subject: 'Stack',        val1: dev1.pontuacao.stack,        val2: dev2.pontuacao.stack },
+    { subject: 'Atividade', val1: dev1.pontuacao.atividade, val2: dev2.pontuacao.atividade },
+    { subject: 'Reconhecimento', val1: dev1.pontuacao.popularidade, val2: dev2.pontuacao.popularidade },
+    { subject: 'Originalidade', val1: dev1.pontuacao.qualidade, val2: dev2.pontuacao.qualidade },
+    { subject: 'Projetos', val1: dev1.pontuacao.consistencia, val2: dev2.pontuacao.consistencia },
+    { subject: 'Estudo', val1: dev1.pontuacao.stack, val2: dev2.pontuacao.stack },
   ];
 
   const radarData = metricas.map((m) => ({ subject: m.subject, A: m.val1, B: m.val2 }));

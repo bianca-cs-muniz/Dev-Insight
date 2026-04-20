@@ -10,21 +10,27 @@ export class GithubScoreIA implements IGithubScoreIA {
   private normalizar = (valor: number, divisor: number) =>
     Math.log10(valor + 1) / Math.log10(divisor + 1);
 
-  calcular(user: GithubUser, repos: GithubRepo[], linguagens: Linguagens, freq: Frequencia): ResultadoScore {
+  calcular(user: GithubUser, repos: GithubRepo[], linguagens: Linguagens, freq: { totalUltimosRepos: number; diasAtivos: number; totalCommits: number }): ResultadoScore {
     const norm = this.normalizar;
+    
+    const scoreRitmo = (norm(freq.diasAtivos, 20) * 0.7) + (norm(freq.totalCommits, 60) * 0.3);
+    const reposProprios = repos.filter(r => !r.fork);
+    const tamanhoTotal = reposProprios.reduce((acc, r) => acc + (r.size || 0), 0);
+    const scoreVolume = (norm(reposProprios.length, 30) * 0.5) + (norm(tamanhoTotal, 50000) * 0.5);
+    const ratioOriginalidade = repos.length > 0 ? (reposProprios.length / repos.length) : 0;
+    const totalEstrelas = repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0);
+    const seguidores = user.followers || 0;
 
     const metricas = {
-      repos:       { valor: repos.length,                                              max: 200,   peso: 0.15 },
-      estrelas:    { valor: repos.reduce((acc, r) => acc + (r.stargazers_count || 0), 0), max: 5000,  peso: 0.25 },
-      forks:       { valor: repos.reduce((acc, r) => acc + (r.forks_count || 0), 0),     max: 2000,  peso: 0.10 },
-      seguidores:  { valor: user.followers || 0,                                       max: 10000, peso: 0.15 },
-      atividade:   { valor: freq.totalUltimosRepos,                                    max: 100,   peso: 0.10 },
-      linguagens:  { valor: Object.keys(linguagens).length,                            max: 10,    peso: 0.10 },
-      engajamento: { valor: (user.followers || 0) / (user.following || 1),             max: 50,    peso: 0.15 },
+      atividade: { valor: scoreRitmo * 100, max: 100, peso: 0.40 },
+      repos: { valor: scoreVolume * 100, max: 100, peso: 0.20 },
+      linguagens: { valor: Object.keys(linguagens).length, max: 12, peso: 0.20 },
+      engajamento: { valor: ratioOriginalidade * 10, max: 10, peso: 0.10 },
+      estrelas: { valor: (totalEstrelas * 0.1) + (seguidores * 0.05), max: 50, peso: 0.10 },
     };
 
     const score = Math.min(100, Math.round(
-      Object.values(metricas).reduce((acc, { valor, max, peso }) => acc + norm(valor, max) * peso, 0) * 100,
+      Object.values(metricas).reduce((acc, { valor, max, peso }) => acc + (valor / max) * peso * 100, 0)
     ));
 
     const nivel: Nivel =

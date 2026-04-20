@@ -79,21 +79,21 @@ export const Score = ({ scoreData }: Props) => {
 
       <div className="mt-4 pt-4 border-t border-purple-50 flex flex-col gap-2">
         <div className="flex justify-between text-xs text-slate-600">
-          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Estrelas</Tipografias.TextoPequenoSimples>
-          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>{scoreData.breakdown.estrelas}%</Tipografias.TextoPequenoSimples>
+          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Atividade</Tipografias.TextoPequenoSimples>
+          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>{scoreData.breakdown.atividade}%</Tipografias.TextoPequenoSimples>
         </div>
         
         <div className="h-1.5 rounded-full bg-purple-50 overflow-hidden">
-          <div className="h-full rounded-full bg-purple-400" style={{ width: `${scoreData.breakdown.estrelas}%` }}/>
+          <div className="h-full rounded-full bg-purple-400" style={{ width: `${scoreData.breakdown.atividade}%` }}/>
         </div>
         
         <div className="flex justify-between text-xs text-slate-600">
-          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Seguidores</Tipografias.TextoPequenoSimples>
-          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>{scoreData.breakdown.seguidores}%</Tipografias.TextoPequenoSimples>
+          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Projetos</Tipografias.TextoPequenoSimples>
+          <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>{scoreData.breakdown.repos}%</Tipografias.TextoPequenoSimples>
         </div>
         
         <div className="h-1.5 rounded-full bg-purple-50 overflow-hidden">
-          <div className="h-full rounded-full bg-indigo-400" style={{ width: `${scoreData.breakdown.seguidores}%` }}/>
+          <div className="h-full rounded-full bg-indigo-400" style={{ width: `${scoreData.breakdown.repos}%` }}/>
         </div>
       </div>
     </div>

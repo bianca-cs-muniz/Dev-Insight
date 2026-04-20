@@ -58,6 +58,14 @@ const formatarComparacao = (data: any) => {
         descricao: repo.description || 'Sem descrição',
         linguagem: repo.language || 'Geral',
       })),
+    maturidade: user.repos.length > 0 
+      ? Math.round(user.repos.reduce((acc: number, r: any) => {
+          const inicio = new Date(r.created_at).getTime();
+          const fim = new Date(r.pushed_at || r.updated_at).getTime();
+          return acc + (fim - inicio) / (1000 * 60 * 60 * 24 * 30);
+        }, 0) / user.repos.length)
+      : 0,
+    intensidade: user.score.breakdown.atividade,
   });
 
   const dev1Formatted = formatUser(data.user1);
@@ -84,8 +92,8 @@ const formatarComparacao = (data: any) => {
       data.user1.score.breakdown.atividade > data.user2.score.breakdown.atividade
         ? data.user1.dados.login
         : data.user2.dados.login,
-    maisInfluente:
-      data.user1.score.breakdown.estrelas > data.user2.score.breakdown.estrelas
+    maisEstudioso:
+      data.user1.score.breakdown.linguagens > data.user2.score.breakdown.linguagens
         ? data.user1.dados.login
         : data.user2.dados.login,
     maisConsistente:

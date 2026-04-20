@@ -11,13 +11,23 @@ export class BuscarUsuario {
   ) {}
 
   async execute(nomeUsuario: string) {
-    const [usuario, repositorios] = await Promise.all([
+    const [usuario, repositorios, eventos] = await Promise.all([
       this.githubRepository.buscarUsuario(nomeUsuario),
       this.githubRepository.buscarRepos(nomeUsuario),
+      this.githubRepository.buscarEventos(nomeUsuario),
     ]);
 
     const contagemLinguagens = LinguagemUtils.contar(repositorios);
-    const dadosFrequencia = { totalUltimosRepos: repositorios.length };
+    
+    const pushEvents = eventos.filter(e => e.type === 'PushEvent');
+    const totalCommits = pushEvents.reduce((acc, e) => acc + (e.payload?.commits?.length || 0), 0);
+    const diasAtivos = new Set(eventos.map(e => new Date(e.created_at).toDateString())).size;
+
+    const dadosFrequencia = { 
+      totalUltimosRepos: repositorios.length,
+      diasAtivos,
+      totalCommits
+    };
 
     const insights = this.gerarInsights.executar(
       usuario,

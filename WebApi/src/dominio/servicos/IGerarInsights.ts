@@ -1,5 +1,5 @@
 import { GithubUser, GithubRepo } from "../tipos/Github";
 
 export interface IGerarInsights {
-  executar(user: GithubUser, repos: GithubRepo[], linguagens: Record<string, number>, freq: { totalUltimosRepos: number }): string[];
+  executar(user: GithubUser, repos: GithubRepo[], linguagens: Record<string, number>, freq: { totalUltimosRepos: number; diasAtivos: number; totalCommits: number }): string[];
 }

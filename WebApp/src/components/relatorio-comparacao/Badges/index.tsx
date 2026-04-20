@@ -1,7 +1,7 @@
 'use client';
 
 import { Tipografias } from '@shared/components/tipografias';
-import { Flame, Star, Calendar, Trophy, Brain, LucideIcon } from 'lucide-react';
+import { Flame, Trophy, Brain, LucideIcon } from 'lucide-react';
 
 interface DevStats {
   username: string;
@@ -11,7 +11,7 @@ interface DevStats {
 interface BadgesProps {
   badges: {
     maisAtivo: string;
-    maisInfluente: string;
+    maisEstudioso: string;
     maisConsistente: string;
   };
   dev1: DevStats;
@@ -82,23 +82,23 @@ export const Badges = ({ badges, dev1, dev2 }: BadgesProps) => {
           color="#FF8A4C"
           backgroundColor='#f6f5f3'
           title="Mais Ativo" 
-          subtitle="Maior frequência de commits" 
+          subtitle="Maior esforço e atividade recente" 
           winnerUsername={badges.maisAtivo} 
         />
         <BadgeCard 
-          icon={Star} 
-          color="#FFC542" 
-          backgroundColor='#f0f7f0'
-          title="Mais Influente" 
-          subtitle="Maior número de stars" 
-          winnerUsername={badges.maisInfluente} 
+          icon={Brain} 
+          color="#A855F7" 
+          backgroundColor='#faf5ff'
+          title="Mais Estudioso" 
+          subtitle="Maior diversidade de tecnologias" 
+          winnerUsername={badges.maisEstudioso} 
         />
         <BadgeCard 
-          icon={Brain} 
+          icon={Trophy} 
           color="#6FDAA8" 
           backgroundColor='#e5f9f8'
-          title="Mais Consistente" 
-          subtitle="Maior número de repositórios" 
+          title="Mestre de Projetos" 
+          subtitle="Maior volume de repositórios" 
           winnerUsername={badges.maisConsistente} 
         />
       </div>

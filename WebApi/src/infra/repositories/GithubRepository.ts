@@ -46,6 +46,20 @@ export class GithubRepository implements IGithubRepository {
     }
   }
 
+  async buscarEventos(username: string): Promise<any[]> {
+    const cacheKey = `events:${username}`;
+    const cached = await this.cache.get<any[]>(cacheKey);
+    if (cached) return cached;
+
+    try {
+      const { data } = await this.client.get(`/users/${username}/events/public?per_page=100`);
+      await this.cache.set(cacheKey, data);
+      return data;
+    } catch (error) {
+      return [];
+    }
+  }
+
   private handleError(error: any, notFoundMsg: string): never {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 404) throw new NotFoundException(notFoundMsg);
