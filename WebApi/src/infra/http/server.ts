@@ -22,6 +22,12 @@ app.use(cors({
 app.use(express.json());
 app.use(routes);
 
-app.listen(PORT, () => {
-  console.log(`🚀 API rodando na porta ${PORT}`);
-});
+// Exporta para a Vercel
+export default app;
+
+// Roda o listen apenas se não estiver na Vercel
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 API rodando na porta ${PORT}`);
+  });
+}
