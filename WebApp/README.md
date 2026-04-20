@@ -1,66 +1,85 @@
-# DevInsight - WebApp
+# 💎 Dev-Insight WebApp
 
-## 🚀 Sobre o Projeto
-O **DevInsight** é uma plataforma moderna de análise de perfis do GitHub. O objetivo principal é fornecer insights visuais e detalhados sobre a atividade de desenvolvedores, transformando dados brutos da API do GitHub em relatórios elegantes com gráficos e métricas de desempenho.
+O **Dev-Insight** é uma plataforma front-end premium projetada para transformar dados brutos do GitHub em experiências visuais ricas e intuitivas. Utilizando uma estética moderna baseada em **Glassmorphism**, a aplicação oferece dashboards detalhados e ferramentas de comparação de desenvolvedores.
 
-## 🛠️ Tecnologias Utilizadas
-- **Core**: [Next.js 15+](https://nextjs.org/) & [React 19](https://react.dev/)
-- **Estilização**: [Tailwind CSS](https://tailwindcss.com/) & [Material UI (MUI)](https://mui.com/)
-- **Gerenciamento de Dados**: [TanStack Query (v5)](https://tanstack.com/query/latest) & [Axios](https://axios-http.com/)
-- **Visualização de Dados**: [Recharts](https://recharts.org/)
+---
+
+## ✨ Funcionalidades Principais
+
+- **🔍 Busca Inteligente**: Pesquisa instantânea de usuários do GitHub com suporte a parâmetros de URL para compartilhamento facilitado.
+- **📊 Dashboard de Performance**: Relatórios completos contendo:
+  - Distribuição de linguagens (Gráfico de Pizza).
+  - Análise de métricas (Stars, Forks, Seguidores).
+  - Insights gerados por IA sobre o perfil.
+- **⚔️ Comparação de Perfis (Duelo)**: Interface lado a lado para comparar dois desenvolvedores, com indicadores de vencedor e breakdown de pontuação.
+- **🎨 Design System Premium**: Interface futurista utilizando efeitos de desfoque, gradientes vibrantes e micro-animações.
+- **📱 Responsividade Total**: Experiência otimizada para desktops, tablets e dispositivos móveis.
+
+---
+
+## 🛠️ Stack Tecnológica
+
+- **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
+- **Linguagem**: [TypeScript](https://www.typescriptlang.org/)
+- **Estilização**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Estado & Fetching**: [TanStack Query v5](https://tanstack.com/query/latest) (React Query)
+- **Gráficos**: [Recharts](https://recharts.org/)
 - **Ícones**: [Lucide React](https://lucide.dev/)
-- **Tipografia**: [Google Fonts](https://fonts.google.com/) (Geist, Alfa Slab One)
+- **Cliente HTTP**: [Axios](https://axios-http.com/)
 
-## 📂 Estrutura de Pastas
-O projeto utiliza a estrutura do `App Router` do Next.js, mas centraliza a lógica de negócios e componentes dentro do diretório `src/`:
+---
 
-- `app/`: Configurações globais, metadados e o ponto de entrada principal (`page.tsx`).
-- `src/`:
-  - `components/`: Componentes modulares, organizados por funcionalidades (`buscarUsuario`, `relatorioUsuario`).
-  - `services/`: Camada de comunicação com APIs externas e configuração do cliente HTTP.
-  - `Router/`: Lógica central de alternância de visualização baseada em estados da URL.
-  - `hooks/`: Hooks customizados para encapsular lógica de estado e efeitos.
-  - `lib/`: Configurações de bibliotecas e definições de design (fontes, temas).
-  - `utils/`: Funções auxiliares, formatações e máscaras.
-  - `constants/`: Enums, configurações de ambiente e valores estáticos.
+## 🏗️ Estrutura do Projeto
 
-## 🛣️ Rotas e Navegação
-A aplicação opera em uma estrutura de **Single Page Application (SPA)** dentro da rota raíz:
+A aplicação segue uma estrutura modular focada em componentes reutilizáveis:
 
-- **Busca**: `/` (Estado inicial)
-- **Dashboard/Relatório**: `/?gitHub={username}`
-  - O componente `Router` monitora o parâmetro `gitHub` na URL para renderizar dinamicamente o relatório do usuário solicitado ou a tela de busca inicial.
+- **`app/`**: Definição de rotas e layouts globais.
+- **`src/components/`**: Componentes de UI organizados por contexto:
+  - `buscar-usuario`: Lógica de busca e input.
+  - `relatorio-usuario`: Cards, gráficos e informações do perfil individual.
+  - `comparar-usuario`: Interface de seleção para duelo.
+  - `relatorio-comparacao`: Visualização do resultado do duelo.
+- **`src/services/`**: Camada de integração com a WebApi.
+- **`src/hooks/`**: Hooks customizados para lógica de negócio e consumo de dados.
+- **`src/lib/`**: Configurações de bibliotecas de terceiros.
+- **`src/shared/`**: Componentes de UI genéricos (botões, inputs, cards).
 
-## 🏃 Como Rodar o Projeto
+---
+
+## 🛣️ Rotas
+
+- **Home**: `/` - Tela de busca e dashboard individual (via query params `?gitHub=username`).
+- **Comparação**: `/comparar-perfis` - Ferramenta de duelo entre dois desenvolvedores.
+
+---
+
+## 🚀 Como Iniciar
 
 ### Pré-requisitos
-Certifique-se de ter o **Node.js** instalado em sua máquina.
+- Node.js 18+
+- [Dev-Insight WebApi](https://github.com/Bia07003MuNiz/Dev-Insight/tree/main/WebApi) rodando localmente ou em produção.
 
-### Instalação
+### Passo a Passo
 
-1. Clone o repositório e navegue até a pasta `WebApp`:
-   ```bash
-   cd WebApp
-   ```
-
-2. Instale as dependências:
+1. **Instale as dependências:**
    ```bash
    npm install
    ```
 
-3. Configure as variáveis de ambiente:
-   Crie um arquivo `.env` na raíz da pasta `WebApp`:
+2. **Configuração das Variáveis de Ambiente:**
+   Crie um arquivo `.env.local` na raiz:
    ```env
-   NEXT_PUBLIC_API_URL=SUA_URL_DA_API_AQUI
+   NEXT_PUBLIC_API_URL=http://localhost:3009
    ```
 
-### Execução
+3. **Inicie o ambiente de desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
 
-Para iniciar o servidor de desenvolvimento:
-```bash
-npm run dev
-```
-Acesse `http://localhost:3000` no seu navegador.
+4. **Acesse:**
+   O projeto estará disponível em `http://localhost:3000`.
 
 ---
-Desenvolvido com foco em performance e experiência do usuário. 💻✨
+
+Desenvolvido com ❤️ por **Dev-Insight Team** | [Bianca Muñiz](https://github.com/Bia07003MuNiz)
