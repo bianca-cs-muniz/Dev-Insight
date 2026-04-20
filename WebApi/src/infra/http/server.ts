@@ -15,15 +15,20 @@ if (!process.env.FRONTEND_URL) {
   console.warn('⚠️ AVISO: FRONTEND_URL não definido. O CORS pode bloquear requisições.');
 }
 
+const frontendUrl = process.env.FRONTEND_URL?.replace(/\/$/, '') || '*';
+
 app.set('json spaces', 2);
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: frontendUrl,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
 app.use(routes);
 
 // Exporta para a Vercel
 export default app;
+
 
 // Roda o listen apenas se não estiver na Vercel
 if (process.env.NODE_ENV !== 'production') {
