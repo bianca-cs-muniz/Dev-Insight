@@ -12,6 +12,10 @@ import { GithubScoreIA } from '../../dominio/utils/GithubScoreIA';
 
 const routes = Router();
 
+routes.get('/', (req, res) => {
+  res.json({ message: 'Dev-Insight API is running! 🚀' });
+});
+
 // Composição das dependências (Manual DI)
 const githubCache = new GithubCache();
 const gerarInsights = new GerarInsights();
