@@ -54,9 +54,14 @@ export const AnalisePontuacao = ({ dev1, dev2 }: AnalisePontuacaoProps) => {
           </Tipografias.TextoPequenoSimples>
         </div>
         <div className="flex gap-4 text-sm font-semibold">
-          <Tipografias.TextoPequeno className="!text-purple-700">@{dev1.username}</Tipografias.TextoPequeno>
-          <Tipografias.TextoPequeno className="!text-blue-500">@{dev2.username}</Tipografias.TextoPequeno>
+          <a href={`https://github.com/${dev1.username}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+            <Tipografias.TextoPequeno className="!text-purple-700">@{dev1.username}</Tipografias.TextoPequeno>
+          </a>
+          <a href={`https://github.com/${dev2.username}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+            <Tipografias.TextoPequeno className="!text-blue-500">@{dev2.username}</Tipografias.TextoPequeno>
+          </a>
         </div>
+
       </div>
 
       <div className="flex flex-col xl:flex-row items-center gap-10">

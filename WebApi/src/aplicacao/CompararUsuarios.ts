@@ -1,11 +1,11 @@
 import { IGithubRepository } from '../dominio/repositorios/IGithubRepository';
-import { IGithubScoreIA } from '../dominio/servicos/IGithubScoreIA';
+import { IGithubScoreCalculator } from '../dominio/servicos/IGithubScoreCalculator';
 import { LinguagemUtils } from '../dominio/utils/LinguagemUtils';
 
 export class CompararUsuarios {
   constructor(
     private readonly githubRepository: IGithubRepository,
-    private readonly githubScoreIA: IGithubScoreIA,
+    private readonly githubScoreCalculator: IGithubScoreCalculator,
   ) {}
 
   async execute(nomeUsuario1: string, nomeUsuario2: string) {
@@ -31,14 +31,14 @@ export class CompararUsuarios {
     const freq1 = processarFrequencia(eventos1, repositorios1);
     const freq2 = processarFrequencia(eventos2, repositorios2);
 
-    const pontuacao1 = this.githubScoreIA.calcular(
+    const pontuacao1 = this.githubScoreCalculator.calcular(
       usuario1,
       repositorios1,
       linguagensUsuario1,
       freq1
     );
 
-    const pontuacao2 = this.githubScoreIA.calcular(
+    const pontuacao2 = this.githubScoreCalculator.calcular(
       usuario2,
       repositorios2,
       linguagensUsuario2,

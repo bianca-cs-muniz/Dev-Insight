@@ -9,6 +9,7 @@ interface Props {
     language: string | null;
     stargazers_count: number;
     forks_count: number;
+    html_url: string;
   }[];
 }
 
@@ -24,42 +25,47 @@ export const TopRepositorios = ({ repositorios }: Props) => {
         <Tipografias.TextoPequenoSimples className='!text-[13px] !text-slate-600'>Ordenado por estrelas</Tipografias.TextoPequenoSimples>
       </div>
 
-      <ul className="flex flex-col gap-3 flex-1">
+      <ul className="flex flex-col gap-3 mt-4 flex-1">
         {topRepos.map((repo) => (
-          <li
-            key={repo.name}
-            className="group flex flex-col gap-1.5 rounded-xl border border-purple-50 bg-purple-50/40 px-4 py-3
-            hover:bg-purple-50 hover:border-purple-200 hover:shadow-sm transition-all duration-200 cursor-pointer"
-          >
-            <div className="flex items-center justify-between gap-2">
-              <Tipografias.TextoPequeno className='!text-purple-700 !text-[14px] !leading-none'>{repo.name}</Tipografias.TextoPequeno>
-              <div className="flex items-center gap-3 shrink-0">
-                <div className="flex items-center gap-1.5 mt-0.5">
-                  <span
-                    className="w-2.5 h-2.5 rounded-full shrink-0"
-                    style={{ backgroundColor: (repo.language && CORES_LINGUAGENS[repo.language]) || '#8B5CF6' }}
-                  />
-                  <Tipografias.TextoPequenoSimples className='!text-slate-500 !text-[13px] !leading-none'>{repo.language || 'Geral'}</Tipografias.TextoPequenoSimples>
+          <li key={repo.name}>
+            <a
+              href={repo.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col gap-1.5 rounded-xl border border-purple-50 bg-purple-50/40 px-4 py-3
+              hover:bg-purple-100/60 hover:border-purple-200 hover:shadow-sm transition-all duration-200 cursor-pointer block"
+            >
+              <div className="flex items-center justify-between gap-2">
+                <Tipografias.TextoPequeno className='!text-purple-700 !text-[14px] !leading-none group-hover:underline'>{repo.name}</Tipografias.TextoPequeno>
+                <div className="flex items-center gap-3 shrink-0">
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <span
+                      className="w-2.5 h-2.5 rounded-full shrink-0"
+                      style={{ backgroundColor: (repo.language && CORES_LINGUAGENS[repo.language]) || '#8B5CF6' }}
+                    />
+                    <Tipografias.TextoPequenoSimples className='!text-slate-500 !text-[13px] !leading-none'>{repo.language || 'Geral'}</Tipografias.TextoPequenoSimples>
+                  </div>
+                  <span className="flex items-center gap-1 text-xs text-amber-500 font-semibold">
+                    <Star size={12} className="fill-amber-400 text-amber-400" />
+                    {formatarEstrelas(repo.stargazers_count)}
+                  </span>
+                  
+                  <span className="flex items-center gap-1 text-xs text-slate-600 font-medium">
+                    <GitFork size={12} />
+                    {formatarEstrelas(repo.forks_count)}
+                  </span>
                 </div>
-                <span className="flex items-center gap-1 text-xs text-amber-500 font-semibold">
-                  <Star size={12} className="fill-amber-400 text-amber-400" />
-                  {formatarEstrelas(repo.stargazers_count)}
-                </span>
-                
-                <span className="flex items-center gap-1 text-xs text-slate-600 font-medium">
-                  <GitFork size={12} />
-                  {formatarEstrelas(repo.forks_count)}
-                </span>
               </div>
-            </div>
 
-            {repo.description && (
-              <Tipografias.TextoPequenoSimples className='!text-slate-500 !text-[13px] !leading-none'>{repo.description}</Tipografias.TextoPequenoSimples>
-            )}
+              {repo.description && (
+                <Tipografias.TextoPequenoSimples className='!text-slate-500 !text-[13px] !leading-none line-clamp-1'>{repo.description}</Tipografias.TextoPequenoSimples>
+              )}
+            </a>
           </li>
         ))}
       </ul>
     </div>
   );
 }
+
 

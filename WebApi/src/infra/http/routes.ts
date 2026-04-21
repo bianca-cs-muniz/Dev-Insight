@@ -8,7 +8,7 @@ import { BuscarUsuario } from '../../aplicacao/BuscarUsuario';
 import { CompararUsuarios } from '../../aplicacao/CompararUsuarios';
 import { GithubCache } from '../cache/GithubCache';
 import { GerarInsights } from '../../dominio/utils/GerarInsights';
-import { GithubScoreIA } from '../../dominio/utils/GithubScoreIA';
+import { GithubScoreCalculator } from '../../dominio/utils/GithubScoreCalculator';
 
 const routes = Router();
 
@@ -16,19 +16,18 @@ routes.get('/', (req, res) => {
   res.json({ message: 'Dev-Insight API is running! 🚀' });
 });
 
-// Composição das dependências (Manual DI)
 const githubCache = new GithubCache();
 const gerarInsights = new GerarInsights();
-const githubScoreIA = new GithubScoreIA();
+const githubScoreCalculator = new GithubScoreCalculator();
 
 const githubRepository = new GithubRepository(githubCache);
 
 const githubController = new GithubController(
-  new BuscarUsuario(githubRepository, gerarInsights, githubScoreIA)
+  new BuscarUsuario(githubRepository, gerarInsights, githubScoreCalculator)
 );
 
 const comparacaoController = new ComparacaoController(
-  new CompararUsuarios(githubRepository, githubScoreIA)
+  new CompararUsuarios(githubRepository, githubScoreCalculator)
 );
 
 routes.get('/github/:username', validate(buscarUsuarioSchema), githubController.buscar.bind(githubController));

@@ -48,7 +48,9 @@ export const ComparacaoDireta = ({ dev1, dev2 }: ComparacaoDiretaProps) => {
                   <div className="p-0.5 rounded-full border border-purple-200">
                     <img src={dev1.avatar} alt={dev1.username} className="w-8 h-8 rounded-full" />
                   </div>
-                  <Tipografias.TextoPequeno className="!text-purple-700 !leading-none">@{dev1.username}</Tipografias.TextoPequeno>
+                  <a href={`https://github.com/${dev1.username}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    <Tipografias.TextoPequeno className="!text-purple-700 !leading-none">@{dev1.username}</Tipografias.TextoPequeno>
+                  </a>
                 </div>
               </th>
               <th className="text-center pb-4">
@@ -56,9 +58,12 @@ export const ComparacaoDireta = ({ dev1, dev2 }: ComparacaoDiretaProps) => {
                   <div className="p-0.5 rounded-full border border-blue-200">
                     <img src={dev2.avatar} alt={dev2.username} className="w-8 h-8 rounded-full" />
                   </div>
-                  <Tipografias.TextoPequeno className="!text-blue-600 !leading-none">@{dev2.username}</Tipografias.TextoPequeno>
+                  <a href={`https://github.com/${dev2.username}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    <Tipografias.TextoPequeno className="!text-blue-600 !leading-none">@{dev2.username}</Tipografias.TextoPequeno>
+                  </a>
                 </div>
               </th>
+
             </tr>
           </thead>
 

@@ -44,7 +44,7 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
 
               <div className="flex flex-col gap-1">
                 <h1 className={`${alfa.className} text-xl text-purple-700 flex items-center gap-2 flex-wrap`}>
-                  🏆 @{vencedor.username} <span className="text-black">vence a comparação</span>
+                  🏆 <a href={`https://github.com/${vencedor.username}`} target="_blank" rel="noopener noreferrer" className="hover:underline">@{vencedor.username}</a> <span className="text-black">vence a comparação</span>
                 </h1>
                 <Tipografias.TextoPequeno className="hidden md:block">
                   Venceu por maior consistência e impacto nos repositórios
@@ -72,7 +72,9 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
             <div className="text-center flex flex-col items-center">
                 <Tipografias.Titulo className='!text-purple-700'>{score1}</Tipografias.Titulo>
                 <Tipografias.TextoPequeno className='!text-[12px] !leading-[14px] '>PTS · A</Tipografias.TextoPequeno>
-                <Tipografias.TextoPequeno className='!text-purple-700'> @{dev1.username}</Tipografias.TextoPequeno>
+                <a href={`https://github.com/${dev1.username}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  <Tipografias.TextoPequeno className='!text-purple-700'> @{dev1.username}</Tipografias.TextoPequeno>
+                </a>
             </div>
 
             <Tipografias.TextoPequeno className='!text-[20px]'>vs</Tipografias.TextoPequeno>
@@ -80,7 +82,9 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
              <div className="text-center flex flex-col items-center">
               <Tipografias.Titulo className='!text-blue-600'>{score2}</Tipografias.Titulo>
               <Tipografias.TextoPequeno className='!text-[12px] !leading-[14px] '>PTS · A</Tipografias.TextoPequeno>
-              <Tipografias.TextoPequeno className='!text-blue-600'> @{dev2.username}</Tipografias.TextoPequeno>
+              <a href={`https://github.com/${dev2.username}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                <Tipografias.TextoPequeno className='!text-blue-600'> @{dev2.username}</Tipografias.TextoPequeno>
+              </a>
             </div>
           </div>
 
@@ -96,11 +100,13 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
                 )}
               </div>
 
-              <div>
-                <Tipografias.TextoMedio className='!text-black !leading-[30px]'>{dev1.nome}</Tipografias.TextoMedio>             
-                <div className=" w-full rounded-full px-2 border text-purple-700 border-purple-600 bg-purple-50">
+              <div className="flex flex-col items-center">
+                <a href={`https://github.com/${dev1.username}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  <Tipografias.TextoMedio className='!text-black !leading-[30px]'>{dev1.nome}</Tipografias.TextoMedio>             
+                </a>
+                <a href={`https://github.com/${dev1.username}`} target="_blank" rel="noopener noreferrer" className=" w-full rounded-full px-2 border text-purple-700 border-purple-600 bg-purple-50 hover:bg-purple-100 transition-colors block">
                   <Tipografias.TextoPequeno className='!text-purple-700'> @{dev1.username}</Tipografias.TextoPequeno>
-                </div>
+                </a>
               </div>
 
               <div className="flex gap-3 w-full">
@@ -137,11 +143,13 @@ export const ResultadoHero = ({ dev1, dev2 }: ResultadoHeroProps) => {
                 )}
               </div>
 
-              <div>
-                <Tipografias.TextoMedio className='!text-black !leading-[30px]'>{dev2.nome}</Tipografias.TextoMedio>             
-                <div className="rounded-full border text-blue-600 px-2 border-blue-600 bg-blue-50">
+              <div className="flex flex-col items-center">
+                <a href={`https://github.com/${dev2.username}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  <Tipografias.TextoMedio className='!text-black !leading-[30px]'>{dev2.nome}</Tipografias.TextoMedio>             
+                </a>
+                <a href={`https://github.com/${dev2.username}`} target="_blank" rel="noopener noreferrer" className="rounded-full border text-blue-600 px-2 border-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors block">
                   <Tipografias.TextoPequeno className='!text-blue-600'> @{dev2.username}</Tipografias.TextoPequeno>
-                </div>
+                </a>
               </div>
 
               <div className="flex gap-3 w-full">

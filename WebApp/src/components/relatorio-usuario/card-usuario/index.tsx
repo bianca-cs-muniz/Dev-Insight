@@ -6,6 +6,7 @@ import { alfa } from '@lib/fonts';
 import { Tipografias } from '@shared/components/tipografias';
 import { useRouter } from 'next/navigation';
 import { GithubUserResponse } from '@shared/types/github';
+import { GitHubIcon } from '@shared/icons';
 
 const MetricCard = ({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) => {
   return (
@@ -74,6 +75,15 @@ export const CardUsuario = ({ gitHub, followers, following, publicRepos }:
                   <Tipografias.TextoPequeno className="!text-[#A684FF]">  {gitHub.blog}</Tipografias.TextoPequeno>
                 </a>
               )}
+              <a 
+                href={`https://github.com/${gitHub.login}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-sm text-[#A684FF] hover:underline"
+              >
+                <GitFork size={16}/>
+                 <Tipografias.TextoPequeno className="!text-[#A684FF]">github.com/{gitHub.login}</Tipografias.TextoPequeno>
+              </a>
             </div>
           </div>
         </div>

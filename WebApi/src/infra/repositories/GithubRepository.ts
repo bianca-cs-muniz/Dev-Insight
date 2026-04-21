@@ -18,49 +18,63 @@ export class GithubRepository implements IGithubRepository {
     });
   }
 
-  async buscarUsuario(username: string): Promise<GithubUser> {
-    const cacheKey = `user:${username}`;
-    const cached = await this.cache.get<GithubUser>(cacheKey);
+  private async getCachedOrFetch<T>(
+    cacheKey: string,
+    fetchFn: () => Promise<T>,
+    notFoundMsg?: string
+  ): Promise<T> {
+    const cached = await this.cache.get<T>(cacheKey);
     if (cached) return cached;
 
     try {
-      const { data } = await this.client.get(`/users/${username}`);
+      const data = await fetchFn();
       await this.cache.set(cacheKey, data);
       return data;
     } catch (error) {
-      this.handleError(error, messages.USUARIO_NAO_ENCONTRADO);
+      if (notFoundMsg) {
+        this.handleError(error, notFoundMsg);
+      }
+      throw error;
     }
+  }
+
+  async buscarUsuario(username: string): Promise<GithubUser> {
+    return this.getCachedOrFetch(
+      `user:${username}`,
+      async () => {
+        const { data } = await this.client.get<GithubUser>(`/users/${username}`);
+        return data;
+      },
+      messages.USUARIO_NAO_ENCONTRADO
+    );
   }
 
   async buscarRepos(username: string): Promise<GithubRepo[]> {
-    const cacheKey = `repos:${username}`;
-    const cached = await this.cache.get<GithubRepo[]>(cacheKey);
-    if (cached) return cached;
-
-    try {
-      const { data } = await this.client.get(`/users/${username}/repos?per_page=100&sort=pushed`);
-      await this.cache.set(cacheKey, data);
-      return data;
-    } catch (error) {
-      this.handleError(error, messages.REPOSITORIOS_NAO_ENCONTRADOS);
-    }
+    return this.getCachedOrFetch(
+      `repos:${username}`,
+      async () => {
+        const { data } = await this.client.get<GithubRepo[]>(`/users/${username}/repos?per_page=100&sort=pushed`);
+        return data;
+      },
+      messages.REPOSITORIOS_NAO_ENCONTRADOS
+    );
   }
 
   async buscarEventos(username: string): Promise<any[]> {
-    const cacheKey = `events:${username}`;
-    const cached = await this.cache.get<any[]>(cacheKey);
-    if (cached) return cached;
-
     try {
-      const { data } = await this.client.get(`/users/${username}/events/public?per_page=100`);
-      await this.cache.set(cacheKey, data);
-      return data;
+      return await this.getCachedOrFetch(
+        `events:${username}`,
+        async () => {
+          const { data } = await this.client.get<any[]>(`/users/${username}/events/public?per_page=100`);
+          return data;
+        }
+      );
     } catch (error) {
       return [];
     }
   }
 
-  private handleError(error: any, notFoundMsg: string): never {
+  private handleError(error: unknown, notFoundMsg: string): never {
     if (axios.isAxiosError(error)) {
       if (error.response?.status === 404) throw new NotFoundException(notFoundMsg);
       if (error.response?.status === 403) throw new RateLimitException();
@@ -68,3 +82,4 @@ export class GithubRepository implements IGithubRepository {
     throw error;
   }
 }
+

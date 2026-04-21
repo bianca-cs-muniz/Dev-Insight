@@ -1,13 +1,13 @@
 import { IGithubRepository } from '../dominio/repositorios/IGithubRepository';
 import { IGerarInsights } from '../dominio/servicos/IGerarInsights';
-import { IGithubScoreIA } from '../dominio/servicos/IGithubScoreIA';
+import { IGithubScoreCalculator } from '../dominio/servicos/IGithubScoreCalculator';
 import { LinguagemUtils } from '../dominio/utils/LinguagemUtils';
 
 export class BuscarUsuario {
   constructor(
     private readonly githubRepository: IGithubRepository,
     private readonly gerarInsights: IGerarInsights,
-    private readonly githubScoreIA: IGithubScoreIA,
+    private readonly githubScoreCalculator: IGithubScoreCalculator,
   ) {}
 
   async execute(nomeUsuario: string) {
@@ -36,7 +36,7 @@ export class BuscarUsuario {
       dadosFrequencia
     );
 
-    const pontuacao = this.githubScoreIA.calcular(
+    const pontuacao = this.githubScoreCalculator.calcular(
       usuario,
       repositorios,
       contagemLinguagens,
